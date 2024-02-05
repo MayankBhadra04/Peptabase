@@ -1,4 +1,3 @@
-
 INSERT INTO aptamers (
     aptamer, target, apt_type, length, sequence,
     effect, reference

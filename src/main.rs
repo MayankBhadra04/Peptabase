@@ -1,10 +1,9 @@
 use std::fs;
+use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{error, get, post, web::{self, Json, ServiceConfig}, Result, HttpResponse};
+use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse};
 use shuttle_actix_web::ShuttleActixWeb;
-use shuttle_runtime::CustomError;
-use sqlx::{Error, Executor, FromRow, PgPool, query};
-use sqlx::postgres::PgQueryResult;
+use sqlx::{Executor, FromRow, PgPool};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 
@@ -27,6 +26,25 @@ struct Entry {
 async fn actix_web(
     #[shuttle_shared_db::Postgres] pool: PgPool,
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
+
+    let table  = "CREATE TABLE aptamers (
+   aptamer varchar(39) DEFAULT NULL,
+   target varchar(67) DEFAULT NULL,
+   apt_type varchar(10) DEFAULT NULL,
+   length varchar(3) DEFAULT NULL,
+   sequence varchar(42) DEFAULT NULL,
+   effect varchar(285) DEFAULT NULL,
+   reference varchar(415) DEFAULT NULL
+);";
+    let resp1 = sqlx::query(&table).execute(&pool).await;
+    match resp1{
+        Ok(_) => {
+            println!("Created table");
+        }
+        Err(_) => {
+            println!("Error in creating table");
+        }
+    }
     let query = fs::read_to_string("schema.sql").unwrap();
     let resp = sqlx::query(&query).execute(&pool).await;
     match resp{
@@ -43,6 +61,7 @@ async fn actix_web(
     let config = move |cfg: &mut ServiceConfig| {
         cfg.service(
             web::scope("/v1")
+                .wrap(Cors::default().allow_any_origin().allow_any_method().allow_any_header().supports_credentials())
                 .wrap_fn(|req, srv| {
                     println!("{} {}", req.method(), req.uri());
                     let future = srv.call(req);
