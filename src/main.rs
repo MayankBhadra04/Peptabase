@@ -3,7 +3,7 @@ use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse, get, post};
 use shuttle_actix_web::ShuttleActixWeb;
-use sqlx::{Error, Executor, FromRow, PgPool, query, Row};
+use sqlx::{Error, Executor, FromRow, PgPool, Row};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 
