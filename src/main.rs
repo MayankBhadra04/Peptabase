@@ -3,7 +3,7 @@ use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse, get, post};
 use shuttle_actix_web::ShuttleActixWeb;
-use sqlx::{Error, Executor, FromRow, PgPool, Row};
+use sqlx::{Error, Executor, FromRow, PgPool, query, Row};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 
@@ -106,8 +106,10 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
 
 #[get("/{field}")]
 async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
-    let field: &str = &path.into_inner();
-    let query = sqlx::query("SELECT $1 from aptamers").bind(&field).fetch_all(&pool.pool).await;
+    let mut field: &str = &path.into_inner();
+    field = field.trim();
+    let query = format!("SELECT DISTINCT {} from aptamers;", &field);
+    let query = sqlx::query(&query).fetch_all(&pool.pool).await;
     match query {
         Ok(q) => {
             let rows = q
