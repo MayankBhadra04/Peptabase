@@ -89,7 +89,7 @@ async fn actix_web(
 }
 
 pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
-    let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers")
+    let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers ORDER BY aptamer ASC")
         .fetch_all(&pool.pool)
         .await
         .map_err(|e| error::ErrorBadRequest(e.to_string())).unwrap();
@@ -108,7 +108,7 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
 async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
     let mut field: &str = &path.into_inner();
     field = field.trim();
-    let query = format!("SELECT DISTINCT {} from aptamers;", &field);
+    let query = format!("SELECT DISTINCT {} from aptamers ORDER by aptamer ASC;", &field);
     let query = sqlx::query(&query).fetch_all(&pool.pool).await;
     match query {
         Ok(q) => {
@@ -171,6 +171,7 @@ pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> Http
         sql.pop(); // Remove last character ('N')
         sql.pop(); // Remove last character ('A')
         sql.pop(); // Remove last character (' ')
+        sql.push_str(&" ORDER BY aptamer ASC".to_string());
         sql.push(';');
     }
     println!("{}", &sql);
