@@ -21,7 +21,7 @@ struct Entry {
     effect: String,
     reference: String
 }
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 struct Query {
     aptamer: String,
     target: String,
@@ -80,6 +80,7 @@ async fn actix_web(
                 .route("/fetch", web::get().to(fetch))
                 .route("/insert", web::post().to(insert))
                 .service(fetch_partial)
+                .service(fetch_single)
                 .app_data(state),
         );
     };
@@ -105,14 +106,14 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
 
 #[get("/{field}")]
 async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
-    let field = path.into_inner();
+    let field: &str = &path.into_inner();
     let query = sqlx::query("SELECT $1 from aptamers").bind(&field).fetch_all(&pool.pool).await;
     match query {
         Ok(q) => {
             let rows = q
                 .iter()
-                .map(|r| r.get::<String, _>(field))
-                .collect::<Vec<String>>();
+                .map(|r| r.get::<&str, _>(field))
+                .collect::<Vec<&str>>();
             let json = serde_json::to_string(&rows).unwrap();
             HttpResponse::Ok().body(json)
         }
@@ -147,19 +148,20 @@ async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
 pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
     let mut sql = "SELECT * FROM aptamers WHERE".to_string();
     let mut idx = 1;
-
+    println!("{:?}", &query);
     if &query.aptamer != "" {
-        sql.push_str(&format!(" aptamer = {} AND", &query.aptamer));
+        sql.push_str(&format!(" aptamer = '{}' AND", &query.aptamer));
         idx += 1;
     }
     if &query.target != "" {
-        sql.push_str(&format!(" target = {} AND", &query.target));
+        sql.push_str(&format!(" target = '{}' AND", &query.target));
         idx += 1;
     }
     if &query.apt_type != "" {
-        sql.push_str(&format!(" apt_type = {} AND", &query.apt_type));
+        sql.push_str(&format!(" apt_type = '{}' AND", &query.apt_type));
         idx += 1;
     }
+
 
     // Remove the trailing " AND" if it exists
     if sql.ends_with(" AND") {
@@ -169,6 +171,7 @@ pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> Http
         sql.pop(); // Remove last character (' ')
         sql.push(';');
     }
+    println!("{}", &sql);
 
     let todo: Result<Vec<Entry>, Error> = sqlx::query_as(&sql)
         .fetch_all(&pool.pool)
