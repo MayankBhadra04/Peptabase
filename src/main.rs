@@ -1,9 +1,9 @@
 use std::fs;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse};
+use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse, get, post};
 use shuttle_actix_web::ShuttleActixWeb;
-use sqlx::{Executor, FromRow, PgPool};
+use sqlx::{Error, Executor, FromRow, PgPool, query, Row};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 
@@ -20,6 +20,12 @@ struct Entry {
     sequence: String,
     effect: String,
     reference: String
+}
+#[derive(Deserialize)]
+struct Query {
+    aptamer: String,
+    target: String,
+    apt_type: String
 }
 
 #[shuttle_runtime::main]
@@ -73,6 +79,7 @@ async fn actix_web(
                 .wrap(Logger::default())
                 .route("/fetch", web::get().to(fetch))
                 .route("/insert", web::post().to(insert))
+                .service(fetch_partial)
                 .app_data(state),
         );
     };
@@ -88,14 +95,34 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
 
     let json_string = serde_json::to_string(&todo);
     match json_string {
-        Ok(s) => {HttpResponse::Ok().body(s)}
+        Ok(s) => { HttpResponse::Ok().body(s) }
         Err(_) => {
             HttpResponse::InternalServerError().finish()
         }
     }
 }
 
-pub async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
+
+#[get("/{field}")]
+async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
+    let field = path.into_inner();
+    let query = sqlx::query("SELECT $1 from aptamers").bind(&field).fetch_all(&pool.pool).await;
+    match query {
+        Ok(q) => {
+            let rows = q
+                .iter()
+                .map(|r| r.get::<String, _>(field))
+                .collect::<Vec<String>>();
+            let json = serde_json::to_string(&rows).unwrap();
+            HttpResponse::Ok().body(json)
+        }
+        Err(_) => {
+            HttpResponse::NotFound().body("Invalid field".to_string())
+        }
+    }
+}
+
+async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
     match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
         .bind(&data.aptamer)
         .bind(&data.target)
@@ -113,5 +140,51 @@ pub async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpRespons
         Err(_) => {
             HttpResponse::Conflict().finish()
         }
+    }
+}
+
+#[post("/")]
+pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
+    let mut sql = "SELECT * FROM aptamers WHERE".to_string();
+    let mut idx = 1;
+
+    if &query.aptamer != "" {
+        sql.push_str(&format!(" aptamer = {} AND", &query.aptamer));
+        idx += 1;
+    }
+    if &query.target != "" {
+        sql.push_str(&format!(" target = {} AND", &query.target));
+        idx += 1;
+    }
+    if &query.apt_type != "" {
+        sql.push_str(&format!(" apt_type = {} AND", &query.apt_type));
+        idx += 1;
+    }
+
+    // Remove the trailing " AND" if it exists
+    if sql.ends_with(" AND") {
+        sql.pop(); // Remove last character ('D')
+        sql.pop(); // Remove last character ('N')
+        sql.pop(); // Remove last character ('A')
+        sql.pop(); // Remove last character (' ')
+        sql.push(';');
+    }
+
+    let todo: Result<Vec<Entry>, Error> = sqlx::query_as(&sql)
+        .fetch_all(&pool.pool)
+        .await;
+    match todo {
+        Ok(s) => {
+            let json_string = serde_json::to_string(&s);
+            match json_string {
+                Ok(st) => {
+                    HttpResponse::Ok().body(st)
+                }
+                Err(_) => {
+                    HttpResponse::InternalServerError().finish()
+                }
+            }
+        },
+        Err(_) => HttpResponse::BadRequest().finish(),
     }
 }
