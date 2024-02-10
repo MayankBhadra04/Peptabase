@@ -1,3 +1,4 @@
+use std::fmt::format;
 use std::fs;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
@@ -25,7 +26,9 @@ struct Entry {
 struct Query {
     aptamer: String,
     target: String,
-    apt_type: String
+    apt_type: String,
+    length: String,
+    sequence: String
 }
 
 #[shuttle_runtime::main]
@@ -149,19 +152,21 @@ async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
 #[post("/")]
 pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
     let mut sql = "SELECT * FROM aptamers WHERE".to_string();
-    let mut idx = 1;
     println!("{:?}", &query);
     if &query.aptamer != "" {
         sql.push_str(&format!(" aptamer = '{}' AND", &query.aptamer));
-        idx += 1;
     }
     if &query.target != "" {
         sql.push_str(&format!(" target = '{}' AND", &query.target));
-        idx += 1;
     }
     if &query.apt_type != "" {
         sql.push_str(&format!(" apt_type = '{}' AND", &query.apt_type));
-        idx += 1;
+    }
+    if &query.length != "" {
+        sql.push_str(&format!(" length(sequence) > {}", &query.length));
+    }
+    if &query.sequence != "" {
+        sql.push_str(&format!(" sequence = '{}' AND", &query.sequence));
     }
 
 
