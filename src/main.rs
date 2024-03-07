@@ -163,7 +163,7 @@ pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> Http
         sql.push_str(&format!(" apt_type = '{}' AND", &query.apt_type));
     }
     if &query.length != "" {
-        sql.push_str(&format!(" length(sequence) > {}", &query.length));
+        sql.push_str(&format!(" length(sequence) > {} AND", &query.length));
     }
     if &query.sequence != "" {
         sql.push_str(&format!(" sequence = '{}' AND", &query.sequence));
