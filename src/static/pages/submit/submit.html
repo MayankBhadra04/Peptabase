@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptamer Database</title>
+    <link rel="stylesheet" href="submit.css">
+</head>
+<body>
+    <div>
+        <div>
+            <div class="m_header">
+              <h1>Peptamer Database</h1>
+            </div>
+            <div class="m_navbar">
+              <a href="/" rel="noreferrer" >Home</a>
+              <a href="/pages/about/about.html" >About Us</a>
+              <a href="/pages/submit/submit.html">Submit</a>
+              <a href="/pages/contact/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
+            </div>
+            <div class="m_main">
+                <form id="my-form">
+                    <h2>Aptamer Query</h2>
+                    <div class="field">
+                      <label for="aptamer">Aptamer:</label>
+                      <input type="text" id="aptamer" name="aptamer" required>
+                    </div>
+                    <div class="field">
+                      <label for="target">Target:</label>
+                      <input type="text" id="target" name="target" required>
+                    </div>
+                    <div class="field">
+                      <label for="apt_type">Apt_type:</label>
+                      <input type="text" id="apt_type" name="apt_type" required>
+                    </div>
+                    <div class="field">
+                      <label for="length">Length:</label>
+                      <input type="text" id="length" name="length" required>
+                    </div>
+                    <div class="field">
+                      <label for="sequence">Sequence:</label>
+                      <textarea id="sequence" name="sequence" rows="5" cols="30" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                  </form>
+                  
+            </div>
+</body>
+</html>

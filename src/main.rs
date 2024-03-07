@@ -1,10 +1,9 @@
-use std::fmt::format;
-use std::fs;
+use actix_files;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse, get, post};
 use shuttle_actix_web::ShuttleActixWeb;
-use sqlx::{Error, Executor, FromRow, PgPool, query, Row};
+use sqlx::{Error, Executor, FromRow, PgPool, Row};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
 
@@ -54,7 +53,7 @@ async fn actix_web(
             println!("Error in creating table");
         }
     }
-    let query = fs::read_to_string("schema.sql").unwrap();
+    let query = std::fs::read_to_string("schema.sql").unwrap();
     let resp = sqlx::query(&query).execute(&pool).await;
     match resp{
         Ok(_) => {
@@ -90,6 +89,7 @@ async fn actix_web(
 
     Ok(config.into())
 }
+
 
 pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
     let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers ORDER BY aptamer ASC")
@@ -149,7 +149,7 @@ async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
     }
 }
 
-#[post("/")]
+#[post("/fetchsingle")]
 pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
     let mut sql = "SELECT * FROM aptamers WHERE".to_string();
     println!("{:?}", &query);
