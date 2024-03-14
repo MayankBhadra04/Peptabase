@@ -7,7 +7,7 @@ use std::fs::File;
 use std::io::Read;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{App, HttpServer, web::{self, ServiceConfig}};
+use actix_web::{App, HttpResponse, HttpServer, web::{self, ServiceConfig}};
 use shuttle_actix_web::ShuttleActixWeb;
 use sqlx::{FromRow, PgPool};
 use serde_derive::{Deserialize, Serialize};
@@ -51,6 +51,9 @@ async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), 
 
     Ok(())
 }
+async fn hello() -> HttpResponse {
+    HttpResponse::Ok().body("Hello World!")
+}
 
 #[shuttle_runtime::main]
 async fn actix_web(
@@ -73,6 +76,7 @@ async fn actix_web(
                         Ok(result)
                     }
                 })
+                .route("/", web::get().to(hello))
                 .wrap(Logger::default())
                 .configure(view_config)
                 // .configure(static_config)
@@ -81,6 +85,7 @@ async fn actix_web(
                 .app_data(state),
         );
     };
+    println!("All set!");
     Ok(config.into())
 }
 
