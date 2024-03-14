@@ -3,20 +3,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchResults = document.getElementById('search-results');
 
   searchForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); 
 
-    // Get selected filter values
     const aptamerType = document.getElementById('m_AptamerType').value;
     const sortBy = document.getElementById('m_SortBy').value;
     const show = document.getElementById('m_Show').value;
 
-    // Construct the query string with optional parameters
-    const queryString = new URLSearchParams();
-    if (aptamerType !== 'All') queryString.append('aptamerType', aptamerType);
-    if (sortBy) queryString.append('sortBy', sortBy);
-    if (show) queryString.append('show', show);
-//  `https://aptabase.shuttleapp.rs/v1/fetch/${queryString.toString()}`
-    fetch(`https://aptabase.shuttleapp.rs/v1/fetch`)
+
+    // const queryString = new URLSearchParams();
+    // if (aptamerType !== 'All') queryString.append('apt_type', aptamerType);
+    // if (sortBy) queryString.append('sortBy', sortBy);
+    // if (show) queryString.append('show', show);
+
+    if(aptamerType == 'All')
+    {
+      fetch(`http://localhost:8080/v1/fetch`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -24,14 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.json();
     })
     .then(data => {
-      // Clear existing results
       searchResults.innerHTML = '';
 
-      // Create table element
+
       const table = document.createElement('table');
       table.classList.add('search-table');
 
-      // Create table header row
       const headerRow = table.createTHead().insertRow();
       Object.keys(data[0]).forEach(key => {
         const headerCell = document.createElement('th');
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         headerRow.appendChild(headerCell);
       });
 
-      // Create table body
       const tbody = table.createTBody();
       data.forEach(result => {
         const row = tbody.insertRow();
@@ -49,12 +47,65 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      // Append table to searchResults div
       searchResults.appendChild(table);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
-      // Handle errors appropriately
     });
+
+    }
+    else
+    {
+
+      const requestBody = {
+        aptamer: '',
+        target: '',
+        apt_type: aptamerType !== 'All' ? aptamerType : '', // Check if aptamerType is not 'All'
+        length: '',
+        sequence: ''
+      };
+      console.log(JSON.stringify(requestBody));
+      fetch('http://localhost:8080/v1/fetchsingle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody) 
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+
+        searchResults.innerHTML = '';
+  
+        const table = document.createElement('table');
+        table.classList.add('search-table');
+
+        const headerRow = table.createTHead().insertRow();
+        Object.keys(data[0]).forEach(key => {
+          const headerCell = document.createElement('th');
+          headerCell.textContent = key;
+          headerRow.appendChild(headerCell);
+        });
+  
+        const tbody = table.createTBody();
+        data.forEach(result => {
+          const row = tbody.insertRow();
+          Object.values(result).forEach(value => {
+            const cell = row.insertCell();
+            cell.textContent = value;
+          });
+        });
+        searchResults.appendChild(table);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+    }
+
   });
 });

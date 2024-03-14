@@ -7,7 +7,7 @@ use crate::auth::jwt::JwToken;
 use crate::view::insert::insert;
 
 #[derive(FromRow, Serialize, Deserialize)]
-struct PendingList {
+pub struct PendingList {
     id: i32,
     email: String,
     aptamer: String,
@@ -20,7 +20,7 @@ struct PendingList {
     status: String
 }
 #[derive(Serialize, Deserialize)]
-struct ApprovalList {
+pub struct ApprovalList {
     id: i32,
     decision: bool
 }
