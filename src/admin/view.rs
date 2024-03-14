@@ -56,12 +56,12 @@ pub async fn approve (pool: Data<AppState>, payload: Json<ApprovalList>, jwt: Jw
                 .execute(&pool.pool)
                 .await {
                 Ok(_) => {
-                    insert(&pool.pool, payload.id).await
+                    return insert(&pool.pool, payload.id).await;
                 }
                 Err(_) => {
-                    HttpResponse::BadRequest().finish()
+                    return HttpResponse::BadRequest().finish();
                 }
-            }
+            };
             HttpResponse::Ok().finish()
         } else {
             match sqlx::query("DELETE * from pending_list where id=$1")

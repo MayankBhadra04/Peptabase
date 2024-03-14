@@ -27,7 +27,7 @@ pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
             s
         }
         Err(_) => {
-            HttpResponse::BadRequest().finish()
+            return HttpResponse::BadRequest().finish();
         }
     };
 
@@ -39,7 +39,7 @@ pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
         .bind(&data.sequence)
         .bind(&data.effect)
         .bind(&data.reference)
-        .execute(&pool)
+        .execute(pool)
         .await
         .map_err(|e| error::ErrorBadRequest(e.to_string())) {
         Ok(_) => {
