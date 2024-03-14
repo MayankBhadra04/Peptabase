@@ -63,7 +63,7 @@ pub async fn approve (pool: Data<AppState>, payload: Json<ApprovalList>, jwt: Jw
                 }
             };
         } else {
-            match sqlx::query("DELETE * from pending_list where id=$1")
+            match sqlx::query("DELETE from pending_list where id=$1")
                 .bind(&payload.id)
                 .execute(&pool.pool)
                 .await {

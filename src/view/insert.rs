@@ -68,8 +68,8 @@ pub async fn insert_approval(pool: web::Data<AppState>, data: Json<EntryApproval
         Ok(_) => {
             HttpResponse::Ok().finish()
         }
-        Err(_) => {
-            HttpResponse::BadRequest().finish()
+        Err(e) => {
+            HttpResponse::BadRequest().body(e.to_string())
         }
     }
 

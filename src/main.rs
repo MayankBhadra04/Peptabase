@@ -3,6 +3,8 @@ mod view;
 mod admin;
 mod auth;
 
+use std::fs::File;
+use std::io::Read;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
 use actix_web::{App, HttpServer, web::{self, ServiceConfig}};
@@ -30,12 +32,31 @@ struct Entry {
     reference: String
 }
 
+async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), sqlx::Error> {
+    // Read SQL file
+    let mut file = File::open(filename)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+
+    // Split queries by delimiter (;)
+    let queries: Vec<&str> = contents.split(';').collect();
+
+    // Execute each query
+    for query in queries {
+        let trimmed_query = query.trim();
+        if !trimmed_query.is_empty() {
+            sqlx::query(trimmed_query).execute(pool).await?;
+        }
+    }
+
+    Ok(())
+}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let database_url = "postgresql://darshil:9919@localhost:5432/aptabase".to_string();
     let pool = PgPool::connect(&database_url).await.expect("Failed to create pool");
-    sqlx::migrate!("./migrations").run(&pool).await.expect("Error migrating database");
+    execute_queries_from_file(&pool, "./migrations/0001_aptamer.sql").await.unwrap();
     println!("Database migration successful");
     let state: Data<AppState> = Data::new(AppState { pool });
 

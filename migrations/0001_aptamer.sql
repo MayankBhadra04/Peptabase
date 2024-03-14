@@ -1,5 +1,3 @@
-CREATE TYPE status_enum as ENUM ('Pending', 'Approved');
-
 CREATE TABLE aptamers (
     aptamer varchar(39) DEFAULT NULL,
     target varchar(67) DEFAULT NULL,
@@ -19,7 +17,7 @@ CREATE TABLE pending_list (
     sequence varchar(42) DEFAULT NULL,
     effect varchar(285) DEFAULT NULL,
     reference varchar(415) DEFAULT NULL,
-    status status_enum
+    status varchar(10) DEFAULT 'Pending'
 );
 CREATE TABLE users (
     email VARCHAR PRIMARY KEY,
@@ -249,7 +247,7 @@ VALUES
     (
         'TRIPalpha', 'Rho-GEF inhibitor',
         'Anticancer', '42', 'AREGADGAICGYNLATLVMLGPSERVFCPLCEPCSSDIYELM',
-        'inhibit Rho-GEF', 'Identi¢cation of the first Rho^GEF inhibitor, TRIPK, which targets the RhoA-specific GEF domain of Trio, Susanne Schmidta, Sylvie Dirionga, Jean Me¤rya, Eric Fabbriziob, Anne Debanta;'
+        'inhibit Rho-GEF', 'Identi¢cation of the first Rho^GEF inhibitor, TRIPK, which targets the RhoA-specific GEF domain of Trio, Susanne Schmidta, Sylvie Dirionga, Jean Me¤rya, Eric Fabbriziob, Anne Debanta'
     ),
     (
         'A17', 'inhibit hsp70', 'Anticancer',

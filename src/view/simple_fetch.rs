@@ -85,7 +85,7 @@ pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> Http
 pub async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
     let mut field: &str = &path.into_inner();
     field = field.trim();
-    let query = format!("SELECT DISTINCT {} from aptamers ORDER by aptamer ASC;", &field);
+    let query = format!("SELECT DISTINCT {} from aptamers ORDER by {} ASC;", &field, &field);
     let query = sqlx::query(&query).fetch_all(&pool.pool).await;
     match query {
         Ok(q) => {
