@@ -51,18 +51,17 @@ pub async fn view(pool: Data<AppState>) -> HttpResponse {
 pub async fn approve (pool: Data<AppState>, payload: Json<ApprovalList>, jwt: JwToken) -> HttpResponse {
     if jwt.is_admin == true {
         if payload.decision == true {
-            match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
+            return match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
                 .bind(&payload.id)
                 .execute(&pool.pool)
                 .await {
                 Ok(_) => {
-                    return insert(&pool.pool, payload.id).await;
+                    insert(&pool.pool, payload.id).await
                 }
                 Err(_) => {
-                    return HttpResponse::BadRequest().finish();
+                    HttpResponse::BadRequest().finish()
                 }
             };
-            HttpResponse::Ok().finish()
         } else {
             match sqlx::query("DELETE * from pending_list where id=$1")
                 .bind(&payload.id)

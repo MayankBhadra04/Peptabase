@@ -2,7 +2,6 @@ use actix_web::{error, HttpResponse, post, web};
 use actix_web::web::Json;
 use serde_derive::{Deserialize, Serialize};
 use sqlx::{Error, FromRow, PgPool};
-use sqlx::postgres::PgRow;
 use crate::{AppState, Entry};
 
 #[derive(FromRow, Serialize, Deserialize)]

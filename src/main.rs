@@ -1,12 +1,12 @@
 mod view;
-mod r#static;
+// mod r#static;
 mod admin;
 mod auth;
 
 use actix_files;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse};
+use actix_web::{ web::{self,  ServiceConfig}};
 use shuttle_actix_web::ShuttleActixWeb;
 use sqlx::{Executor, FromRow, PgPool, Row};
 use serde_derive::{Deserialize, Serialize};
@@ -14,7 +14,7 @@ use actix_web::dev::Service;
 use actix_web::web::Data;
 use crate::admin::admin_config;
 use crate::auth::auth_config;
-use crate::r#static::static_config;
+// use crate::r#static::static_config;
 use crate::view::view_config;
 
 #[derive(Clone)]
@@ -39,6 +39,7 @@ async fn actix_web(
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
 
     sqlx::migrate!("./migrations").run(&pool).await.expect("Error migrating database");
+    println!("Database migration successful");
     let state: Data<AppState> = Data::new(AppState { pool });
 
     let config = move |cfg: &mut ServiceConfig| {
@@ -55,7 +56,7 @@ async fn actix_web(
                 })
                 .wrap(Logger::default())
                 .configure(view_config)
-                .configure(static_config)
+                // .configure(static_config)
                 .configure(admin_config)
                 .configure(auth_config)
                 .app_data(state),
