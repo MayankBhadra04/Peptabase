@@ -15,7 +15,19 @@
     <list default="true" id="f6379750-8449-41c3-829f-c850fee2f3b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/0001_aptamer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/0001_aptamer.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/view.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/view.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/jwt.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/login.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/login.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/register.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/register.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/insert.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/insert.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/simple_fetch.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/simple_fetch.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +36,13 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,27 +64,34 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/darshil/LED/Rust/Aritra&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/auth" />
       <recent name="$PROJECT_DIR$/src/static" />
     </key>
   </component>
@@ -117,7 +143,9 @@
       <option name="presentableId" value="Default" />
       <updated>1709796705557</updated>
       <workItem from="1709796706638" duration="1280000" />
-      <workItem from="1709799763265" duration="2613000" />
+      <workItem from="1709799763265" duration="3665000" />
+      <workItem from="1710384793020" duration="5711000" />
+      <workItem from="1710392297623" duration="1595000" />
     </task>
     <servers />
   </component>
@@ -129,8 +157,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/main.rs</url>
-          <line>94</line>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,11 +1,21 @@
+mod view;
+mod r#static;
+mod admin;
+mod auth;
+
 use actix_files;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse, get, post};
+use actix_web::{error, web::{self, Json, ServiceConfig}, HttpResponse};
 use shuttle_actix_web::ShuttleActixWeb;
-use sqlx::{Error, Executor, FromRow, PgPool, Row};
+use sqlx::{Executor, FromRow, PgPool, Row};
 use serde_derive::{Deserialize, Serialize};
 use actix_web::dev::Service;
+use actix_web::web::Data;
+use crate::admin::admin_config;
+use crate::auth::auth_config;
+use crate::r#static::static_config;
+use crate::view::view_config;
 
 #[derive(Clone)]
 struct AppState {
@@ -21,54 +31,19 @@ struct Entry {
     effect: String,
     reference: String
 }
-#[derive(Deserialize, Debug)]
-struct Query {
-    aptamer: String,
-    target: String,
-    apt_type: String,
-    length: String,
-    sequence: String
-}
+
 
 #[shuttle_runtime::main]
 async fn actix_web(
     #[shuttle_shared_db::Postgres] pool: PgPool,
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
 
-    let table  = "CREATE TABLE aptamers (
-   aptamer varchar(39) DEFAULT NULL,
-   target varchar(67) DEFAULT NULL,
-   apt_type varchar(10) DEFAULT NULL,
-   length varchar(3) DEFAULT NULL,
-   sequence varchar(42) DEFAULT NULL,
-   effect varchar(285) DEFAULT NULL,
-   reference varchar(415) DEFAULT NULL
-);";
-    let resp1 = sqlx::query(&table).execute(&pool).await;
-    match resp1{
-        Ok(_) => {
-            println!("Created table");
-        }
-        Err(_) => {
-            println!("Error in creating table");
-        }
-    }
-    let query = std::fs::read_to_string("schema.sql").unwrap();
-    let resp = sqlx::query(&query).execute(&pool).await;
-    match resp{
-        Ok(_) => {
-            println!("Created database");
-        }
-        Err(_) => {
-            println!("Error in database");
-        }
-    }
-
-    let state = web::Data::new(AppState { pool });
+    sqlx::migrate!("./migrations").run(&pool).await.expect("Error migrating database");
+    let state: Data<AppState> = Data::new(AppState { pool });
 
     let config = move |cfg: &mut ServiceConfig| {
         cfg.service(
-            web::scope("/v1")
+            web::scope("/")
                 .wrap(Cors::default().allow_any_origin().allow_any_method().allow_any_header().supports_credentials())
                 .wrap_fn(|req, srv| {
                     println!("{} {}", req.method(), req.uri());
@@ -79,123 +54,14 @@ async fn actix_web(
                     }
                 })
                 .wrap(Logger::default())
-                .route("/fetch", web::get().to(fetch))
-                .route("/insert", web::post().to(insert))
-                .service(fetch_partial)
-                .service(fetch_single)
+                .configure(view_config)
+                .configure(static_config)
+                .configure(admin_config)
+                .configure(auth_config)
                 .app_data(state),
+
         );
     };
-
     Ok(config.into())
 }
 
-
-pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
-    let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers ORDER BY aptamer ASC")
-        .fetch_all(&pool.pool)
-        .await
-        .map_err(|e| error::ErrorBadRequest(e.to_string())).unwrap();
-
-    let json_string = serde_json::to_string(&todo);
-    match json_string {
-        Ok(s) => { HttpResponse::Ok().body(s) }
-        Err(_) => {
-            HttpResponse::InternalServerError().finish()
-        }
-    }
-}
-
-
-#[get("/{field}")]
-async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
-    let mut field: &str = &path.into_inner();
-    field = field.trim();
-    let query = format!("SELECT DISTINCT {} from aptamers ORDER by aptamer ASC;", &field);
-    let query = sqlx::query(&query).fetch_all(&pool.pool).await;
-    match query {
-        Ok(q) => {
-            let rows = q
-                .iter()
-                .map(|r| r.get::<&str, _>(field))
-                .collect::<Vec<&str>>();
-            let json = serde_json::to_string(&rows).unwrap();
-            HttpResponse::Ok().body(json)
-        }
-        Err(_) => {
-            HttpResponse::NotFound().body("Invalid field".to_string())
-        }
-    }
-}
-
-async fn insert(pool: web::Data<AppState>, data: Json<Entry>) -> HttpResponse {
-    match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
-        .bind(&data.aptamer)
-        .bind(&data.target)
-        .bind(&data.apt_type)
-        .bind(&data.length)
-        .bind(&data.sequence)
-        .bind(&data.effect)
-        .bind(&data.reference)
-        .execute(&pool.pool)
-        .await
-        .map_err(|e| error::ErrorBadRequest(e.to_string())) {
-        Ok(_) => {
-            HttpResponse::Ok().finish()
-        }
-        Err(_) => {
-            HttpResponse::Conflict().finish()
-        }
-    }
-}
-
-#[post("/fetchsingle")]
-pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
-    let mut sql = "SELECT * FROM aptamers WHERE".to_string();
-    println!("{:?}", &query);
-    if &query.aptamer != "" {
-        sql.push_str(&format!(" aptamer = '{}' AND", &query.aptamer));
-    }
-    if &query.target != "" {
-        sql.push_str(&format!(" target = '{}' AND", &query.target));
-    }
-    if &query.apt_type != "" {
-        sql.push_str(&format!(" apt_type = '{}' AND", &query.apt_type));
-    }
-    if &query.length != "" {
-        sql.push_str(&format!(" length(sequence) > {} AND", &query.length));
-    }
-    if &query.sequence != "" {
-        sql.push_str(&format!(" sequence = '{}' AND", &query.sequence));
-    }
-
-
-    // Remove the trailing " AND" if it exists
-    if sql.ends_with(" AND") {
-        sql.pop(); // Remove last character ('D')
-        sql.pop(); // Remove last character ('N')
-        sql.pop(); // Remove last character ('A')
-        sql.pop(); // Remove last character (' ')
-        sql.push_str(&" ORDER BY aptamer ASC".to_string());
-        sql.push(';');
-    }
-    println!("{}", &sql);
-
-    let todo: Result<Vec<Entry>, Error> = sqlx::query_as(&sql)
-        .fetch_all(&pool.pool)
-        .await;
-    match todo {
-        Ok(s) => {
-            let json_string = serde_json::to_string(&s);
-            match json_string {
-                Ok(st) => {
-                    HttpResponse::Ok().body(st)
-                }
-                Err(_) => {
-                    HttpResponse::InternalServerError().finish()
-                }
-            }
-        },
-        Err(_) => HttpResponse::BadRequest().finish(),
-    }
-}

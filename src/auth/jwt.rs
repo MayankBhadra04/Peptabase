@@ -4,22 +4,19 @@ use actix_web::error::ErrorUnauthorized;
 use futures::future::{Ready, ok, err};
 use serde::{Deserialize, Serialize};
 use jsonwebtoken::{encode, decode, Header, EncodingKey, DecodingKey, Validation};
-use chrono::{Utc};
+use chrono::{TimeDelta, Utc};
 use sqlx::{FromRow, PgPool};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct JwToken {
-    pub username: String,
     pub exp: usize,
     pub email: String,
-    pub is_admin: i32,
-    pub id: i32,
+    pub is_admin: bool,
 }
-#[derive(Serialize, Deserialize, FromRow)]
+#[derive(FromRow)]
 pub struct AdminEmail {
-    pub id: i32,
-    pub admin: i32,
-    pub username: String
+    pub email: String,
+    pub admin: bool
 }
 impl JwToken {
     pub fn get_key() -> String {
@@ -32,13 +29,13 @@ impl JwToken {
         return token;
     }
     pub async fn new(email: String, pool: &PgPool) -> Self {
-        let todo: AdminEmail = sqlx::query_as("SELECT id, admin, username from users where email=$1")
+        let todo: AdminEmail = sqlx::query_as("SELECT admin, email from users where email=$1")
             .bind(&email)
             .fetch_one(pool)
             .await
             .map_err(|e| error::ErrorBadRequest(e.to_string())).unwrap();
-        let timestamp = Utc::now().checked_add_signed(chrono::Duration::minutes(360)).expect("valid Timestamp").timestamp();
-        return JwToken {username: todo.username, exp: timestamp as usize, email, is_admin: todo.admin, id: todo.id};
+        let timestamp = Utc::now().checked_add_signed(TimeDelta::try_minutes(360).unwrap()).expect("valid Timestamp").timestamp();
+        return JwToken {exp: timestamp as usize, email, is_admin: todo.admin, };
     }
     pub fn from_token(token: String) -> Result<Self, String>{
         let key = DecodingKey::from_secret(
@@ -62,16 +59,9 @@ impl FromRequest for JwToken {
     type Future = Ready<Result<JwToken, Error>>;
 
     fn from_request(req: &HttpRequest, _payload: &mut Payload) -> Self::Future {
-        // let res = req.cookies().unwrap();
-        // println!("{:?}", res);
-        // let hed = req.headers();
-        // println!("{:?}", hed);
-        match req.cookie("jwt") {
+        match req.headers().get("token") {
             Some(data) => {
-                // println!("{}", data);
-                let raw_token = data.value().to_string();
-                // println!("{}", raw_token);
-
+                let raw_token = data.to_str().unwrap().to_string();
                 let token_result = JwToken::from_token(raw_token);
                 match token_result {
                     Ok(token) => {
