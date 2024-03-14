@@ -22,7 +22,7 @@ CREATE TABLE pending_list (
     status status_enum
 );
 CREATE TABLE users (
-    email PRIMARY KEY,
+    email VARCHAR PRIMARY KEY,
     password VARCHAR,
     admin boolean
 );
