@@ -1,4 +1,4 @@
-use bcrypt::{DEFAULT_COST, hash, verify};
+use bcrypt::{DEFAULT_COST, hash};
 use serde::Deserialize;
 use actix_web::{web, HttpResponse, Responder, error};
 use std::error::Error;
@@ -18,9 +18,6 @@ impl NewUser {
             password: hashed_password,
             email
         }
-    }
-    pub fn verify(&self, password: String) -> bool {
-        verify(password.as_str(), &self.password).unwrap()
     }
 }
 pub async fn insert( st: NewUser, pool: &PgPool) -> Result<(), Box<dyn Error>> {

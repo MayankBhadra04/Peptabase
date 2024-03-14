@@ -7,7 +7,7 @@ use std::fs::File;
 use std::io::Read;
 use actix_cors::Cors;
 use actix_web::middleware::Logger;
-use actix_web::{App, HttpResponse, HttpServer, web::{self, ServiceConfig}};
+use actix_web::{ HttpResponse,  web::{self, ServiceConfig}};
 use shuttle_actix_web::ShuttleActixWeb;
 use sqlx::{FromRow, PgPool};
 use serde_derive::{Deserialize, Serialize};
