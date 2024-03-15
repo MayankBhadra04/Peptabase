@@ -57,7 +57,12 @@ async fn actix_web(
     #[shuttle_shared_db::Postgres] pool: PgPool,
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
 
-    execute_queries_from_file(&pool, "./migrations/0001_aptamer.sql").await.unwrap();
+    match execute_queries_from_file(&pool, "./migrations/0001_aptamer.sql").await {
+        Ok(_) => {}
+        Err(e) => {
+            println!("{}", e.to_string());
+        }
+    }
     println!("Database migration successful");
     let state: Data<AppState> = Data::new(AppState { pool });
 
@@ -73,15 +78,15 @@ async fn actix_web(
                         Ok(result)
                     }
                 })
-                .route("/", web::get().to(index))
                 .wrap(Logger::default())
                 .configure(view_config)
                 // .configure(static_config)
                 .configure(admin_config)
                 .configure(auth_config)
-                .service(actix_files::Files::new("/static", "./src/static"))
                 .app_data(state),
         );
+        cfg.route("/", web::get().to(index));
+        cfg.service(actix_files::Files::new("/static", "./src/static"));
     };
     println!("All set!");
     Ok(config.into())

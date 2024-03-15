@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
   const searchResults = document.getElementById('search-results');
+  const baseUrl = 'http://localhost:8000';
 
   searchForm.addEventListener('submit', (event) => {
     event.preventDefault(); 
@@ -17,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if(aptamerType === 'All')
     {
-      fetch(`http://localhost:8080/v1/fetch`)
+      const fetchUrl = `${baseUrl}/v1/fetch`;
+      fetch(fetchUrl)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -65,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sequence: ''
       };
       console.log(JSON.stringify(requestBody));
-      fetch('http://localhost:8080/v1/fetchsingle', {
+      const fetchUrl = `${baseUrl}/v1/fetchsingle`;
+      fetch(fetchUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
