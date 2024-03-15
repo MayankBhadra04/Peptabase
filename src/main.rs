@@ -66,7 +66,7 @@ async fn actix_web(
 
     let config = move |cfg: &mut ServiceConfig| {
         cfg.service(
-            web::scope("/")
+            web::scope("/v1")
                 .wrap(Cors::default().allow_any_origin().allow_any_method().allow_any_header().supports_credentials())
                 .wrap_fn(|req, srv| {
                     println!("{} {}", req.method(), req.uri());
@@ -79,9 +79,11 @@ async fn actix_web(
                 .route("/", web::get().to(hello))
                 .wrap(Logger::default())
                 .configure(view_config)
+                .service(web::resource("/").route(web::get().to(index)))
                 // .configure(static_config)
                 .configure(admin_config)
                 .configure(auth_config)
+                .service(actix_files::Files::new("/static", "./src/static"))
                 .app_data(state),
         );
     };
@@ -89,3 +91,9 @@ async fn actix_web(
     Ok(config.into())
 }
 
+async fn index() -> HttpResponse {
+    // Load the index.html file and return it as the response
+    HttpResponse::Ok()
+        .content_type("text/html")
+        .body(include_str!("static/index.html"))
+}

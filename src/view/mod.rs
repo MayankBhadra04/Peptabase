@@ -7,11 +7,8 @@ use crate::view::insert::insert_approval;
 
 
 pub fn view_config (cfg: &mut web::ServiceConfig) {
-    cfg.service(
-        web::scope("/v1")
-            .route("/fetch", web::get().to(fetch))
-            .route("/fetchsingle", web::post().to(fetch_single))
-            .service(fetch_partial)
-            .service(insert_approval)
-    );
+    cfg.route("/fetch", web::get().to(fetch))
+        .route("/fetchsingle", web::post().to(fetch_single))
+        .service(fetch_partial)
+        .service(insert_approval);
 }
