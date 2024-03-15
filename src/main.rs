@@ -51,9 +51,6 @@ async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), 
 
     Ok(())
 }
-async fn hello() -> HttpResponse {
-    HttpResponse::Ok().body("Hello World!")
-}
 
 #[shuttle_runtime::main]
 async fn actix_web(
@@ -76,10 +73,9 @@ async fn actix_web(
                         Ok(result)
                     }
                 })
-                .route("/", web::get().to(hello))
+                .route("/", web::get().to(index))
                 .wrap(Logger::default())
                 .configure(view_config)
-                .service(web::resource("/").route(web::get().to(index)))
                 // .configure(static_config)
                 .configure(admin_config)
                 .configure(auth_config)

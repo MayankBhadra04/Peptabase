@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // if (sortBy) queryString.append('sortBy', sortBy);
     // if (show) queryString.append('show', show);
 
-    if(aptamerType == 'All')
+    if(aptamerType === 'All')
     {
       fetch(`http://localhost:8080/v1/fetch`)
     .then(response => {
