@@ -1,4 +1,5 @@
 CREATE TABLE aptamers (
+    id SERIAL PRIMARY KEY,
     aptamer varchar(39) DEFAULT NULL,
     target varchar(67) DEFAULT NULL,
     apt_type varchar(10) DEFAULT NULL,

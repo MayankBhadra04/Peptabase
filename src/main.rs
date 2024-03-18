@@ -23,6 +23,7 @@ struct AppState {
 }
 #[derive(FromRow, Serialize, Deserialize)]
 struct Entry {
+    id: i32,
     aptamer: String,
     target: String,
     apt_type: String,

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
   const searchResults = document.getElementById('search-results');
-  const baseUrl = 'http://localhost:8000';
+  const baseUrl = 'https://aptabase.shuttleapp.rs';
 
   searchForm.addEventListener('submit', (event) => {
     event.preventDefault(); 

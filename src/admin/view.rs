@@ -1,8 +1,8 @@
-use actix_web::{HttpResponse};
+use actix_web::{HttpResponse, web};
 use actix_web::web::{Data, Json};
 use serde_derive::{Deserialize, Serialize};
 use sqlx::{FromRow};
-use crate::{AppState};
+use crate::{AppState, Entry};
 use crate::auth::jwt::JwToken;
 use crate::view::insert::insert;
 
@@ -73,6 +73,51 @@ pub async fn approve (pool: Data<AppState>, payload: Json<ApprovalList>, jwt: Jw
                 Err(_) => {
                     HttpResponse::BadRequest().finish()
                 }
+            }
+        }
+    } else {
+        HttpResponse::Unauthorized().finish()
+    }
+}
+
+pub async fn delete_one (jwt: JwToken, path: web::Path<i32>, pool: Data<AppState>) -> HttpResponse {
+    let id = path.into_inner();
+    if jwt.is_admin == true {
+        match sqlx::query("DELETE from aptamers where id=$1")
+            .bind(&id)
+            .execute(&pool.pool)
+            .await {
+            Ok(_) => {
+                HttpResponse::Ok().finish()
+            }
+            Err(_) => {
+                HttpResponse::BadRequest().finish()
+            }
+        }
+    } else {
+        HttpResponse::Unauthorized().finish()
+    }
+}
+
+pub async fn edit_row(jwt: JwToken, pool: Data<AppState>, payload: Json<Entry>) -> HttpResponse {
+    if jwt.is_admin == true {
+        let todo = sqlx::query("UPDATE aptamers set aptamer = $1, target = $2, apt_type = $3, length = $4, sequence = $5, effect = $6, reference = $7 where id = $8")
+            .bind(&payload.aptamer)
+            .bind(&payload.target)
+            .bind(&payload.apt_type)
+            .bind(&payload.length)
+            .bind(&payload.sequence)
+            .bind(&payload.effect)
+            .bind(&payload.reference)
+            .bind(&payload.id)
+            .execute(&pool.pool)
+            .await;
+        match todo {
+            Ok(_) => {
+                HttpResponse::Ok().finish()
+            }
+            Err(_) => {
+                HttpResponse::BadRequest().finish()
             }
         }
     } else {
