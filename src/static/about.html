@@ -1,47 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/static/about.css">
-    <title>Aptabase</title>
-  </head>
-  <body>
-    <u></u>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/static/admin.css">
+  <title>Aptabase</title>
+</head>
+<body>
+<u></u>
 
-    <div>
-      <div class="m_header">
-        <h1>Peptamer Database</h1>
+<div>
+  <div class="m_header">
+    <h1>Peptamer Database</h1>
+  </div>
+  <div class="m_navbar">
+    <a href="/" rel="noreferrer" >Home</a>
+    <a href="/static/about.html" rel="noreferrer">About Us</a>
+    <a href="/static/submit.html" rel="noreferrer">Submit</a>
+    <a href="/static/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
+    <a href="/static/admin.html" class="m_right" rel="noreferrer">Admin Login</a>
+  </div>
+
+
+
+
+  <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div class="m_main">
+    <form id="my-form">
+      <h2>Login</h2>
+      <div class="field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
       </div>
-      <div class="m_navbar">
-        <a href="/" rel="noreferrer" >Home</a>
-        <a href="/static/about.html" rel="noreferrer">About Us</a>
-        <a href="/static/submit.html" rel="noreferrer">Submit</a>
-        <a href="/static/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
-        <a href="/static/admin.html" class="m_right" rel="noreferrer">Admin Login</a>
+      <div class="field">
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required>
       </div>
-      
+      <button type="submit">Submit</button>
+    </form>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
-            <div class="m_main">
-              <h2>PeptamerDatabase</h2>
-              <h5>This is a Comprehensive database of all Peptide Aptamers</h5>
-              <div class="m_fakeimg" style="height: 400px">
-                <img src="https://www.amsbio.com/wp//wp-content/uploads/2019/08/Aptamer-featured-image.jpg" style="height: 320px; align-items: center; justify-content: center; padding-right: 20px;">
-                <img src="https://www.amsbio.com/wp//wp-content/uploads/2019/08/Aptamer-featured-image.jpg" style="height: 320px; align-items: center; justify-content: center; padding-right: 20px;">
-                <img src="https://www.amsbio.com/wp//wp-content/uploads/2019/08/Aptamer-featured-image.jpg" style="height: 320px; align-items: center; justify-content: center; padding-right: 20px;">
-              </div>
-              <p>Description:</p>
-              <p>
-                Peptide aptamers are molecules that bind to protein targets and are
-                able to interfere with their functions. In the past, important
-                achievements have been made using such peptide aptamers in different
-                approaches and for various purposes.Here we tried to collect all
-                peptide aptamers currently known through literature.
-              </p>
-              <br />
-            </div>
-
-    </div>
+  </div>
+</div>
 </body>
 </html>

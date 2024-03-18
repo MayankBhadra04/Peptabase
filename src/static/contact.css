@@ -24,33 +24,33 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_header {
-      padding: 15px;
+    padding: 15px;
   }
 
   .m_header h1 {
-      font-size: 2.5em;
+    font-size: 2.5em;
   }
 }
 
 @media screen and (max-width: 576px) {
   .m_header {
-      padding: 10px;
+    padding: 10px;
   }
 
   .m_header h1 {
-      font-size: 2em;
+    font-size: 2em;
   }
 }
 
 @media screen and (max-width: 414px) {
   .m_header h1 {
-      font-size: 1.8em;
+    font-size: 1.8em;
   }
 }
 
 @media screen and (max-width: 320px) {
   .m_header h1 {
-      font-size: 1.6em;
+    font-size: 1.6em;
   }
 }
 
@@ -88,25 +88,25 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_navbar {
-      flex-wrap: wrap;
+    flex-wrap: wrap;
   }
-  
+
   .m_navbar a {
-      width: 100%;
-      margin: 5px 0;
+    width: 100%;
+    margin: 5px 0;
   }
 
   .m_navbar a.m_right {
-      margin-left: 0;
-      margin-top: 5px;
+    margin-left: 0;
+    margin-top: 5px;
   }
 }
 
 @media screen and (max-width: 400px) {
-.m_navbar a {
-  float: none;
-  width: 100%;
-}
+  .m_navbar a {
+    float: none;
+    width: 100%;
+  }
 }
 
 
@@ -149,21 +149,46 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_side, .m_main {
-      flex: 0 0 100%;
+    flex: 0 0 100%;
   }
 }
 /* ---------------------------------------------------------------------------------------------------------------------------------------------- */
-  select {
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-  }
+select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------ */
+.contact {
+  background-color: #f8f9fa; /* Light gray background */
+  border: 1px solid #ced4da; /* Gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the div */
+  margin-bottom: 20px; /* Space below the div */
+}
+
+.contact h2 {
+  color: #007bff; /* Blue color for the heading */
+  font-size: 1.5em; /* Larger font size for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+}
+
+.contact p {
+  color: #6c757d; /* Gray color for the text */
+  font-size: 1em; /* Normal font size for the text */
+  margin: 5px 0; /* Adjusted margin for each paragraph */
+}
+
+.contact p strong {
+  font-weight: bold; /* Bold text for strong elements */
+}

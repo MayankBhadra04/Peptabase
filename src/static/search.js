@@ -1,64 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
   const searchResults = document.getElementById('search-results');
-  const baseUrl = 'https://aptabase.shuttleapp.rs';
 
   searchForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const aptamerType = document.getElementById('m_AptamerType').value;
     const sortBy = document.getElementById('m_SortBy').value;
     const show = document.getElementById('m_Show').value;
 
+    if (aptamerType === 'All') {
+      fetch(`https://aptabase.shuttleapp.rs/v1/fetch`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            searchResults.innerHTML = '';
 
-    // const queryString = new URLSearchParams();
-    // if (aptamerType !== 'All') queryString.append('apt_type', aptamerType);
-    // if (sortBy) queryString.append('sortBy', sortBy);
-    // if (show) queryString.append('show', show);
+            const table = document.createElement('table');
+            table.classList.add('search-table');
 
-    if(aptamerType === 'All')
-    {
-      const fetchUrl = `${baseUrl}/v1/fetch`;
-      fetch(fetchUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      searchResults.innerHTML = '';
+            const headerRow = table.createTHead().insertRow();
+            Object.keys(data[0]).forEach(key => {
+              const headerCell = document.createElement('th');
+              headerCell.textContent = key;
+              headerRow.appendChild(headerCell);
+            });
 
+            const tbody = table.createTBody();
+            data.forEach(result => {
+              const row = tbody.insertRow();
+              Object.values(result).forEach(value => {
+                const cell = row.insertCell();
+                cell.textContent = value;
+              });
+            });
 
-      const table = document.createElement('table');
-      table.classList.add('search-table');
-
-      const headerRow = table.createTHead().insertRow();
-      Object.keys(data[0]).forEach(key => {
-        const headerCell = document.createElement('th');
-        headerCell.textContent = key;
-        headerRow.appendChild(headerCell);
-      });
-
-      const tbody = table.createTBody();
-      data.forEach(result => {
-        const row = tbody.insertRow();
-        Object.values(result).forEach(value => {
-          const cell = row.insertCell();
-          cell.textContent = value;
-        });
-      });
-
-      searchResults.appendChild(table);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-
-    }
-    else
-    {
-
+            searchResults.appendChild(table);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+    } else {
       const requestBody = {
         aptamer: '',
         target: '',
@@ -67,48 +53,46 @@ document.addEventListener('DOMContentLoaded', function () {
         sequence: ''
       };
       console.log(JSON.stringify(requestBody));
-      const fetchUrl = `${baseUrl}/v1/fetchsingle`;
-      fetch(fetchUrl, {
+      fetch('https://aptabase.shuttleapp.rs/v1/fetchsingle', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBody) 
+        body: JSON.stringify(requestBody)
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            searchResults.innerHTML = '';
 
-        searchResults.innerHTML = '';
-  
-        const table = document.createElement('table');
-        table.classList.add('search-table');
+            const table = document.createElement('table');
+            table.classList.add('search-table');
 
-        const headerRow = table.createTHead().insertRow();
-        Object.keys(data[0]).forEach(key => {
-          const headerCell = document.createElement('th');
-          headerCell.textContent = key;
-          headerRow.appendChild(headerCell);
-        });
-  
-        const tbody = table.createTBody();
-        data.forEach(result => {
-          const row = tbody.insertRow();
-          Object.values(result).forEach(value => {
-            const cell = row.insertCell();
-            cell.textContent = value;
+            const headerRow = table.createTHead().insertRow();
+            Object.keys(data[0]).forEach(key => {
+              const headerCell = document.createElement('th');
+              headerCell.textContent = key;
+              headerRow.appendChild(headerCell);
+            });
+
+            const tbody = table.createTBody();
+            data.forEach(result => {
+              const row = tbody.insertRow();
+              Object.values(result).forEach(value => {
+                const cell = row.insertCell();
+                cell.textContent = value;
+              });
+            });
+
+            searchResults.appendChild(table);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
           });
-        });
-        searchResults.appendChild(table);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
     }
-
   });
 });

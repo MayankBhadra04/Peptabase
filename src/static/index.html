@@ -1,68 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/static/index.css">
-    <title>Aptabase</title>
-  </head>
-  <body>
-    <u></u>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/static/index.css">
+  <title>Aptabase</title>
+</head>
+<body>
+<u></u>
 
-    <div>
-      <div class="m_header">
-        <h1>Peptamer Database</h1>
-      </div>
-      <div class="m_navbar">
-        <a href="/" rel="noreferrer" >Home</a>
-        <a href="/static/about.html" rel="noreferrer">About Us</a>
-        <a href="/static/submit.html" rel="noreferrer">Submit</a>
-        <a href="/static/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
-        <a href="/static/admin.html" class="m_right" rel="noreferrer">Admin Login</a>
-      </div>
-      
-      <div class="m_main">
-        <div class="m_fakeimg" style="height: 400px"> 
-        </div>
-        <br />
-        <h2>Search The Database</h2>
-        <div>
-          <form id="search-form">
-            <label for="m_AptamerType">Aptamer Type</label>
-            <select id="m_AptamerType" name="AptamerType">
-              <option value="All">All</option>
-              <option value="Anticancer">AntiCancer</option>
-              <option value="Antiviral">Antiviral</option>
-              <option value="Diagnostics">Diagnostics</option>
-              <option value="PlantGenomics">PlantGenomics</option>
-              <option value="Other">Other</option>
-            </select>
+<div>
+  <div class="m_header">
+    <h1>Peptamer Database</h1>
+  </div>
+  <div class="m_navbar">
+    <a href="/" rel="noreferrer" >Home</a>
+    <a href="/static/about.html" rel="noreferrer">About Us</a>
+    <a href="/static/submit.html" rel="noreferrer">Submit</a>
+    <a href="/static/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
+    <a href="/static/admin.html" class="m_right" rel="noreferrer">Admin Login</a>
+  </div>
 
-            <label for="m_SortBy">Sort By</label>
-            <select id="m_SortBy" name="SortBy">
-              <option value="Length (low-high)">Length (low-high)</option>
-              <option value="Length (high-low)">Length (high-low)</option>x
-              <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
-              <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
-            </select>
+  <div class="m_main">
+    <div class="m_fakeimg" style="height: 400px">
+    </div>
+    <br />
+    <h2>Search The Database</h2>
+    <div class="search-container">
+      <form id="search-form" class="search-form">
+        <div class="form-group">
+          <label for="m_AptamerType" class="form-label">Aptamer Type</label>
+          <select id="m_AptamerType" name="AptamerType" class="form-control">
+            <option value="All">All</option>
+            <option value="Anticancer">AntiCancer</option>
+            <option value="Antiviral">Antiviral</option>
+            <option value="Diagnostics">Diagnostics</option>
+            <option value="PlantGenomics">PlantGenomics</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
-            <label for="m_Show">Show</label>
-            <select id="m_Show" name="Show">
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-            <br />
-            <input type="submit" value="Submit" />
-          </form>
+        <div class="form-group">
+          <label for="m_SortBy" class="form-label">Sort By</label>
+          <select id="m_SortBy" name="SortBy" class="form-control">
+            <option value="Length (low-high)">Length (low-high)</option>
+            <option value="Length (high-low)">Length (high-low)</option>
+            <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
+            <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
+          </select>
         </div>
-        <div class="results">
-          <ul id="search-results">
-          </ul>
+
+        <div class="form-group">
+          <label for="m_Show" class="form-label">Show</label>
+          <select id="m_Show" name="Show" class="form-control">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
         </div>
+
+        <button type="submit" class="btn">Submit</button>
+      </form>
+
+      <div class="results" style="overflow-x: auto;">
+        <h2>Search Results</h2>
+        <ul id="search-results">
+        </ul>
       </div>
     </div>
 
-    <script src="/static/search.js" defer></script>
-  </body>
+  </div>
+
+  <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+</div>
+  <script src="/static/search.js" defer></script>
+</body>
 </html>

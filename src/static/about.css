@@ -24,33 +24,33 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_header {
-      padding: 15px;
+    padding: 15px;
   }
 
   .m_header h1 {
-      font-size: 2.5em;
+    font-size: 2.5em;
   }
 }
 
 @media screen and (max-width: 576px) {
   .m_header {
-      padding: 10px;
+    padding: 10px;
   }
 
   .m_header h1 {
-      font-size: 2em;
+    font-size: 2em;
   }
 }
 
 @media screen and (max-width: 414px) {
   .m_header h1 {
-      font-size: 1.8em;
+    font-size: 1.8em;
   }
 }
 
 @media screen and (max-width: 320px) {
   .m_header h1 {
-      font-size: 1.6em;
+    font-size: 1.6em;
   }
 }
 
@@ -88,25 +88,25 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_navbar {
-      flex-wrap: wrap;
+    flex-wrap: wrap;
   }
-  
+
   .m_navbar a {
-      width: 100%;
-      margin: 5px 0;
+    width: 100%;
+    margin: 5px 0;
   }
 
   .m_navbar a.m_right {
-      margin-left: 0;
-      margin-top: 5px;
+    margin-left: 0;
+    margin-top: 5px;
   }
 }
 
 @media screen and (max-width: 400px) {
-.m_navbar a {
-  float: none;
-  width: 100%;
-}
+  .m_navbar a {
+    float: none;
+    width: 100%;
+  }
 }
 
 
@@ -149,22 +149,75 @@ body {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .m_side, .m_main {
-      flex: 0 0 100%;
+    flex: 0 0 100%;
   }
 }
 
-  /* -------------------------------------------------------------------------------------------------------------------------------------------- */
-  select {
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-  }
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+
+/* ---------------------------------------------------------------------------- */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  color: #007bff;
+}
+
+.header h5 {
+  font-style: italic;
+  color: #6c757d;
+}
+
+.image-gallery {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.image-gallery img {
+  height: 200px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.description {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.description p {
+  line-height: 1.6;
+  color: #343a40;
+}

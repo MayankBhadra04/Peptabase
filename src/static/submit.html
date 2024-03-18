@@ -1,55 +1,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/static/submit.css ">
+    <link rel="stylesheet" href="/static/submit.css">
     <title>Aptabase</title>
-  </head>
-  <body>
-    <u></u>
+</head>
+<body>
+<u></u>
 
-    <div>
-      <div class="m_header">
+<div>
+    <div class="m_header">
         <h1>Peptamer Database</h1>
-      </div>
-      <div class="m_navbar">
+    </div>
+    <div class="m_navbar">
         <a href="/" rel="noreferrer" >Home</a>
-        <a href="/static/index.html " rel="noreferrer">About Us</a>
+        <a href="/static/about.html" rel="noreferrer">About Us</a>
         <a href="/static/submit.html" rel="noreferrer">Submit</a>
         <a href="/static/contact.html" class="m_right" rel="noreferrer">Contact Us</a>
         <a href="/static/admin.html" class="m_right" rel="noreferrer">Admin Login</a>
-      </div>
-      
-
-<!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
-            <div class="m_main">
-                <form id="my-form">
-                    <h2>Aptamer Query</h2>
-                    <div class="field">
-                      <label for="aptamer">Aptamer:</label>
-                      <input type="text" id="aptamer" name="aptamer" required>
-                    </div>
-                    <div class="field">
-                      <label for="target">Target:</label>
-                      <input type="text" id="target" name="target" required>
-                    </div>
-                    <div class="field">
-                      <label for="apt_type">Apt_type:</label>
-                      <input type="text" id="apt_type" name="apt_type" required>
-                    </div>
-                    <div class="field">
-                      <label for="length">Length:</label>
-                      <input type="text" id="length" name="length" required>
-                    </div>
-                    <div class="field">
-                      <label for="sequence">Sequence:</label>
-                      <textarea id="sequence" name="sequence" rows="5" cols="30" required></textarea>
-                    </div>
-                    <button type="submit">Submit</button>
-                  </form>
-                  
-            </div>
     </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+    <div class="form-container">
+        <form id="my-form" class="aptamer-query-form">
+            <h2>Aptamer Query</h2>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="aptamer" class="form-label">Aptamer:</label>
+                <input type="text" id="aptamer" name="aptamer" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="target" class="form-label">Target:</label>
+                <input type="text" id="target" name="target" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="apt_type" class="form-label">Apt_type:</label>
+                <input type="text" id="apt_type" name="apt_type" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="length" class="form-label">Length:</label>
+                <input type="text" id="length" name="length" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="sequence" class="form-label">Sequence:</label>
+                <textarea id="sequence" name="sequence" rows="5" cols="30" required class="form-control" style="overflow: hidden; max-height: 100px;  max-width: 300px;">
+                    </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="effect" class="form-label">Effect:</label>
+                <input type="text" id="effect" name="effect" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="reference" class="form-label">Reference:</label>
+                <input type="text" id="reference" name="reference" required class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+</div>
+    <script src="/static/submit.js"></script>
+
 </body>
 </html>
