@@ -25,6 +25,7 @@ CREATE TABLE users (
     password VARCHAR,
     admin boolean
 );
+CREATE TABLE
 
 INSERT INTO aptamers (
     aptamer, target, apt_type, length, sequence,

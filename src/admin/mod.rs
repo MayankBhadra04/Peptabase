@@ -8,7 +8,7 @@ pub fn admin_config (cfg: &mut web::ServiceConfig) {
         web::scope("/admin")
             .route("/view", web::get().to(view))
             .route("/approve", web::post().to(approve))
-            .route("/delete", web::delete().to(delete_one))
+            .route("/delete/{id}", web::post().to(delete_one))
             .route("/edit", web::post().to(edit_row))
     );
 }

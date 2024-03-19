@@ -101,3 +101,22 @@ pub async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -
         }
     }
 }
+
+#[get("/fetch/{word}")]
+pub async fn fetch_keyword(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
+    let word = &path.into_inner();
+    let query: Result<Vec<Entry>, Error> = sqlx::query_as("select * from aptamer where CONCAT(aptamer, target, apt_type, sequence, effect, reference) like '%$1%")
+        .bind(word)
+        .fetch_all(&pool.pool)
+        .await;
+
+    match query {
+        Ok(q) => {
+            let json = serde_json::to_string(&q).unwrap();
+            HttpResponse::Ok().body(json)
+        }
+        Err(_) => {
+            HttpResponse::NotFound().body("No results found".to_string())
+        }
+    }
+}
