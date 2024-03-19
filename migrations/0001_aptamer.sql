@@ -25,7 +25,11 @@ CREATE TABLE users (
     password VARCHAR,
     admin boolean
 );
-CREATE TABLE
+CREATE TABLE comment (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR,
+    comment VARCHAR
+);
 
 INSERT INTO aptamers (
     aptamer, target, apt_type, length, sequence,

@@ -1,4 +1,4 @@
-use actix_web::{error, HttpResponse, post, web};
+use actix_web::{App, error, HttpResponse, post, web};
 use actix_web::web::Json;
 use serde_derive::{Deserialize, Serialize};
 use sqlx::{Error, FromRow, PgPool};
@@ -14,6 +14,11 @@ struct EntryApproval {
     sequence: String,
     effect: String,
     reference: String
+}
+#[derive(Deserialize, FromRow)]
+pub struct Comment {
+    email: String,
+    comment: String
 }
 pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
 
@@ -74,4 +79,20 @@ pub async fn insert_approval(pool: web::Data<AppState>, data: Json<EntryApproval
     }
 
 
+}
+
+pub async fn insert_comment(pool: web::Data<AppState>, data: Json<Comment>) -> HttpResponse {
+    let todo = sqlx::query("INSERT INTO comment (email, comment) VALUES ($1, $2)")
+        .bind(&data.email)
+        .bind(&data.comment)
+        .execute(&pool.pool)
+        .await;
+    match todo {
+        Ok(_) => {
+            HttpResponse::Ok().finish()
+        }
+        Err(_) => {
+            HttpResponse::BadRequest().finish()
+        }
+    }
 }
