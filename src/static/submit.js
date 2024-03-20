@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // Make the API call
-        fetch('http://aptabase.shuttleapp.rs/v1/insert', {
+        fetch('https://aptabase.shuttleapp.rs/v1/insert', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
