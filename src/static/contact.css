@@ -192,3 +192,52 @@ div {
 .contact p strong {
   font-weight: bold; /* Bold text for strong elements */
 }
+
+
+/* ----------------------------------------------------comments------------------------------------------------------------------------------------------ */
+
+.user-comments {
+  margin-top: 20px;
+}
+
+.user-comments form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  resize: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */

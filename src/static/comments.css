@@ -1,0 +1,240 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.m_header {
+    background: blueviolet;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.m_header h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .m_header {
+        padding: 15px;
+    }
+
+    .m_header h1 {
+        font-size: 2.5em;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .m_header {
+        padding: 10px;
+    }
+
+    .m_header h1 {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .m_header h1 {
+        font-size: 1.8em;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .m_header h1 {
+        font-size: 1.6em;
+    }
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+.m_navbar {
+    overflow: hidden;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.m_navbar a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 14px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.m_navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.m_navbar a.m_right {
+    margin-left: auto;
+}
+
+.m_navbar a.m_active {
+    background-color: #666;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .m_navbar {
+        flex-wrap: wrap;
+    }
+
+    .m_navbar a {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .m_navbar a.m_right {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .m_navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+
+
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+
+
+.m_row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.m_side {
+    background-color: #f1f1f1;
+    padding: 20px;
+    flex: 0 0 25%; /* Adjust width as needed */
+}
+
+.m_main {
+    background-color: white;
+    padding: 20px;
+    flex: 0 0 75%; /* Adjust width as needed */
+}
+
+.m_fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.m_footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .m_side, .m_main {
+        flex: 0 0 100%;
+    }
+}
+
+
+
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------- */
+select {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+.user-comments {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-comments h2 {
+    margin-bottom: 15px;
+}
+
+.comment-list {
+    max-height: 300px; /* Set maximum height for comment list */
+    overflow-y: auto; /* Add scroll bar if content exceeds max height */
+}
+
+.comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.comment p {
+    margin-bottom: 5px;
+}
+
+.delete-btn {
+    color: red;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
+}
+
+
+.comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    position: relative; /* Required for positioning delete button */
+}
+
+.delete-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background-color: #ff5555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
