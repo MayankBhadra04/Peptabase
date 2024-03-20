@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json',
                 'token': `${authToken}` // Include auth token in the header
             },
-            body: JSON.stringify({ id: itemId, action: action })
+            body: JSON.stringify({ id: itemId, decision: action })
         })
             .then(response => {
                 if (!response.ok) {
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     </td>
                 `;
                 // Add event listeners to the buttons
-                newRow.querySelector('.accept-btn').addEventListener('click', () => handleAction(item.id, 'accept'));
-                newRow.querySelector('.reject-btn').addEventListener('click', () => handleAction(item.id, 'reject'));
+                newRow.querySelector('.accept-btn').addEventListener('click', () => handleAction(item.id, true));
+                newRow.querySelector('.reject-btn').addEventListener('click', () => handleAction(item.id, false));
 
                 tableBody.appendChild(newRow);
             });
