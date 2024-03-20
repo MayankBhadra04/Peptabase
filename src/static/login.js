@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(formData);
 
         const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "https://aptabase.shuttleapp.rs/auth/login");
+        xhttp.open("POST", "https://aptabase.shuttleapp.rs/v1/auth/login");
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(
             JSON.stringify({
