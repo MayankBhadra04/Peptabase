@@ -18,7 +18,7 @@ pub struct PendingList {
     reference: String,
     status: String
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ApprovalList {
     id: i32,
     decision: bool
@@ -49,6 +49,7 @@ pub async fn view(pool: web::Data<AppState>) -> HttpResponse {
 
 pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList>, jwt: JwToken) -> HttpResponse {
     if jwt.is_admin == true {
+        println!("{:?}", payload);
         if payload.decision == true {
             return match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
                 .bind(&payload.id)
