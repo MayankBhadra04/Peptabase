@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             // Make the API call
-            fetch('https://aptabase.shuttleapp.rs/v1/auth/login', {
+            fetch('http://localhost:8080/v1/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
