@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("my-form");
 
-    form.addEventListener("submit", function (event) {
+    // form.addEventListener("submit", function (event) {
         // event.preventDefault();
         // const formData = {
         //     username: document.getElementById("username").value,
@@ -49,5 +49,4 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
         });
-    });
 });
