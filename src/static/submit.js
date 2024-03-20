@@ -25,18 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(formData)
         })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success response here
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error response here
+                console.log(response);
             });
     });
 });
