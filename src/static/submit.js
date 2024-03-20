@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => {
                 console.log(response);
+                if (response.ok) {
+                    prompt("Data submitted successfully");
+                } else if (response.status === 400) {
+                    prompt("Bad Request. Please try again");
+                }
             });
     });
 });
