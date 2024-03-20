@@ -130,6 +130,7 @@ struct GetComment {
     comment: String
 }
 pub async fn view_comment (jwt: JwToken, pool: web::Data<AppState>) -> HttpResponse {
+    println!("{:?}", jwt);
     if jwt.is_admin {
         let result: Result<Vec<GetComment>, Error> = sqlx::query_as("SELECT * from comment")
             .fetch_all(&pool.pool)

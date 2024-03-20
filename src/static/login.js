@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Get form data
             const formData = {
-                username: document.getElementById("username").value,
+                email: document.getElementById("username").value,
                 password: document.getElementById("password").value,
             };
 
             // Make the API call
-            fetch('http://localhost:8080/v1/auth/login', {
+            fetch('https://aptabase.shuttleapp.rs/v1/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,11 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then(response => {
                     console.log(response);
-                    if (response.ok) {
-                        prompt("Data submitted successfully");
-                    } else if (response.status === 400) {
-                        prompt("Bad Request. Please try again");
-                    }
+                    const token = response.headers.get('token');
+                    console.log(token);
+                    localStorage.setItem('authtoken', token);
                 });
         });
 });

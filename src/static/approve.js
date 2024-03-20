@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}` // Include auth token in the header
+                'token': `${authToken}` // Include auth token in the header
             },
             body: JSON.stringify({ id: itemId, action: action })
         })
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('https://aptabase.shuttleapp.rs/v1/admin/view', {
         method : 'GET',
         headers: {
-            'Authorization': `Bearer ${authToken}` // Include auth token in the header
+            'token': `${authToken}` // Include auth token in the header
         }
     })
         .then(response => {
