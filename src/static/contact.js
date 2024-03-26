@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Call API to submit comment
-        fetch('https://aptabase.shuttleapp.rs/v1/view/comment', {
+        fetch('https://aptabase.shuttleapp.rs/v1/comment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
