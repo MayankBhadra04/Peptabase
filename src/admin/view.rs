@@ -24,7 +24,7 @@ pub struct ApprovalList {
     decision: bool
 }
 
-pub async fn view(pool: web::Data<AppState>) -> HttpResponse {
+pub async fn view(pool: web::Data<AppState>, _: JwToken) -> HttpResponse {
     let todo: Result<Vec<PendingList>, _> = sqlx::query_as("SELECT * FROM pending_list where status='Pending' ORDER BY email ASC")
         .fetch_all(&pool.pool)
         .await;
