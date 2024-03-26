@@ -3,6 +3,7 @@ use actix_web::web::Json;
 use serde_derive::Deserialize;
 use sqlx::{Error, Row};
 use crate::{AppState, Entry};
+use crate::auth::jwt::JwToken;
 
 
 #[derive(Deserialize, Debug)]
@@ -28,7 +29,20 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
         }
     }
 }
+pub async fn fetch_admin(pool: web::Data<AppState>, _: JwToken) -> HttpResponse {
+    let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers ORDER BY aptamer ASC")
+        .fetch_all(&pool.pool)
+        .await
+        .map_err(|e| error::ErrorBadRequest(e.to_string())).unwrap();
 
+    let json_string = serde_json::to_string(&todo);
+    match json_string {
+        Ok(s) => { HttpResponse::Ok().body(s) }
+        Err(_) => {
+            HttpResponse::InternalServerError().finish()
+        }
+    }
+}
 
 
 pub async fn fetch_single(query: Json<Query>, pool: web::Data<AppState>) -> HttpResponse{
