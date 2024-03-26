@@ -156,7 +156,7 @@ pub async fn view_comment (jwt: JwToken, pool: web::Data<AppState>) -> HttpRespo
         HttpResponse::Unauthorized().finish()
     }
 }
-#[delete("/delete/{id}")]
+#[delete("/deletecomment/{id}")]
 pub async fn delete_comment (jwt: JwToken, path: web::Path<i32>, pool: web::Data<AppState>) -> HttpResponse {
     if jwt.is_admin {
         let id = path.into_inner();
