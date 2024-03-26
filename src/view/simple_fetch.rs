@@ -121,7 +121,7 @@ pub async fn fetch_keyword(pool: web::Data<AppState>, path: web::Path<String>) -
     let mut word: &str = &path.into_inner();
     word = word.trim();
 
-    let query: Result<Vec<Entry>, Error> = sqlx::query_as("select * from aptamer where CONCAT(aptamer, target, apt_type, sequence, effect, reference) like '%$1%")
+    let query: Result<Vec<Entry>, Error> = sqlx::query_as("select * from aptamers where CONCAT(aptamer, target, apt_type, sequence, effect, reference) like '%$1%")
         .bind(word)
         .fetch_all(&pool.pool)
         .await;
