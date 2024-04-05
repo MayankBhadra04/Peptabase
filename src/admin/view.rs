@@ -1,4 +1,4 @@
-use actix_web::{delete, HttpResponse, web};
+use actix_web::{App, delete, error, HttpResponse, web};
 use serde_derive::{Deserialize, Serialize};
 use sqlx::{Error, FromRow};
 use crate::{AppState, Entry};
@@ -174,4 +174,30 @@ pub async fn delete_comment (jwt: JwToken, path: web::Path<i32>, pool: web::Data
     } else {
         HttpResponse::Unauthorized().finish()
     }
+}
+
+pub async fn insert_admin (pool: web::Data<AppState>, data: web::Json<Entry>, jwt: JwToken) -> HttpResponse {
+    if !jwt.is_admin {
+        HttpResponse::Unauthorized().finish()
+    } else {
+        match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
+            .bind(&data.aptamer)
+            .bind(&data.target)
+            .bind(&data.apt_type)
+            .bind(&data.length)
+            .bind(&data.sequence)
+            .bind(&data.effect)
+            .bind(&data.reference)
+            .execute(&pool.pool)
+            .await
+            .map_err(|e| error::ErrorBadRequest(e.to_string())) {
+            Ok(_) => {
+                HttpResponse::Ok().finish()
+            }
+            Err(_) => {
+                HttpResponse::Conflict().finish()
+            }
+        }
+    }
+
 }

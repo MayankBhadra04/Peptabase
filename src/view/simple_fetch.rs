@@ -120,9 +120,8 @@ pub async fn fetch_partial(pool: web::Data<AppState>, path: web::Path<String>) -
 pub async fn fetch_keyword(pool: web::Data<AppState>, path: web::Path<String>) -> HttpResponse {
     let mut word: &str = &path.into_inner();
     word = word.trim();
-
-    let query: Result<Vec<Entry>, Error> = sqlx::query_as("select * from aptamers where CONCAT(aptamer, target, apt_type, sequence, effect, reference) like '%$1%")
-        .bind(word)
+    let q = format!("SELECT * FROM aptamers WHERE CONCAT(LOWER(aptamer), LOWER(target), LOWER(apt_type), LOWER(sequence), LOWER(effect), LOWER(reference)) LIKE '%{}%'", word);
+    let query: Result<Vec<Entry>, Error> = sqlx::query_as(&q)
         .fetch_all(&pool.pool)
         .await;
 
@@ -131,8 +130,8 @@ pub async fn fetch_keyword(pool: web::Data<AppState>, path: web::Path<String>) -
             let json = serde_json::to_string(&q).unwrap();
             HttpResponse::Ok().body(json)
         }
-        Err(_) => {
-            HttpResponse::NotFound().body("No results found".to_string())
+        Err(e) => {
+            HttpResponse::NotFound().body(e.to_string())
         }
     }
 }

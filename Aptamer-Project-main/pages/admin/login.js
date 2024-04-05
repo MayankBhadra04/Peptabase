@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
               body: JSON.stringify(formData)
           })
               .then(response => {
-                  if(response.status === 200){
+                  if(response.status == 200){
                       console.log(response);``
                       const token = response.headers.get('token');
                       console.log(token);

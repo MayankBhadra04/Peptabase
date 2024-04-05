@@ -152,89 +152,108 @@
         flex: 0 0 100%;
     }
   }
-  
-  
-  
-  
+  /* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+    select {
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    div {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
   /* ---------------------------------------------------------------------------------------------------------------------------------------------- */
-  select {
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  
+  
+    
+  
+  
+    /* --------------------------------------------------------------------------------------------------------------------------------------- */
+  
+    /* Base styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
   }
-  div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
+  
+  /* Form container */
+  .form-container {
+    width: 400px; /* Adjust width as needed */
+    margin: 50px auto; /* Center the form horizontally */
     padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Aptamer query form */
+  .aptamer-query-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Form group */
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Form label */
+  .form-label {
+    width: 120px; /* Adjust label width as needed */
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Form control (input and textarea) */
+  .form-control {
+    flex: 1; /* Take up remaining space */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
   }
   
   
+  /* Textarea */
+  .form-control[type="textarea"] {
+    box-sizing: border-box;
+    padding: 0; /* Remove any default padding */
+    margin: 0; /* Remove any default margin */
+    height: 100px; /* Adjust height as needed */
+    max-width: 300px; /* Adjust as needed */
+  }
   
-    /*-------------------------------------------------------------------------------------------------------------------------------------------------*/
-    .user-comments {
-        margin-top: 20px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .user-comments h2 {
-        margin-bottom: 15px;
-    }
-    
-    .comment-list {
-        max-height: 300px; /* Set maximum height for comment list */
-        overflow-y: auto; /* Add scroll bar if content exceeds max height */
-    }
-    
-    .comment {
-        border-bottom: 1px solid #ccc;
-        padding: 10px 0;
-    }
-    
-    .comment p {
-        margin-bottom: 5px;
-    }
-    
-    .delete-btn {
-        color: red;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-    
-    .delete-btn:hover {
-        text-decoration: underline;
-    }
-    
-
-    .comment {
-        border-bottom: 1px solid #ccc;
-        padding: 10px 0;
-        position: relative; /* Required for positioning delete button */
-    }
-    
-    .delete-btn {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        background-color: #ff5555;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    
-    .delete-btn:hover {
-        background-color: #cc0000;
-    }
-
-    
-    /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+  /* Submit button */
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db; /* Adjust color as needed */
+    color: #fff; /* Text color */
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .btn:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+  }
+  
+  .textarea{
+    box-sizing: border-box;
+    padding: 0; /* Remove any default padding */
+    margin: 0; /* Remove any default margin */
+    height: 100px; /* Adjust height as needed */
+    max-width: 50px; /* Adjust as needed */
+  }
+  
+    /* --------------------------------------------------------------------------------------------------------------------------------------- */
