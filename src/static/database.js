@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Redirect to admin login page if auth token is not present
   if (!authToken) {
-      window.location.href = '/pages/admin/admin.html';
+      window.location.href = '/static/admin.html';
   } else {
       fetchAndPopulateData(); // Call function to fetch and populate data
   }
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Populate table with fetched data
 function handleEdit(itemId) {
-    window.location.href = `/pages/edit/edit.html/${itemId}`;
+    window.location.href = `/static/edit.html/${itemId}`;
 }
 
 

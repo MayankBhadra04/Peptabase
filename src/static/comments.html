@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="/static/comments.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aptabase</title>
     <script>
       window.onload = function() {
         const authToken = localStorage.getItem('authtoken');
         if (!authToken) {
-          window.location.href = '/pages/admin/admin.html'; // Redirect to the login page
+          window.location.href = '/static/admin.html'; // Redirect to the login page
         }
       }
     </script>
@@ -24,11 +24,11 @@
             <h1>Peptamer Database</h1>
         </div>
         <div class="m_navbar">
-            <a href="/" rel="noreferrer">Home</a>
-            <a href="/pages/about/about.html" rel="noreferrer">About Us</a>
-            <a href="/pages/submit/submit.html" rel="noreferrer">Submit</a>
-            <a href="/pages/contact/contact.html"  rel="noreferrer">Contact Us</a>
-            <a href="/pages/admin/admin.html" rel="noreferrer">Admin Login</a>
+            <a href="/" rel="noreferrer" >Home</a>
+            <a href="/static/about.html" rel="noreferrer">About Us</a>
+            <a href="/static/submit.html" rel="noreferrer">Submit</a>
+            <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
+            <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
         </div>
 
         <!-- Table will be populated by JavaScript -->
@@ -41,6 +41,6 @@
         
     </div>
 
-    <script src="comments.js"></script>
+    <script src="/static/comments.js"></script>
 </body>
 </html>

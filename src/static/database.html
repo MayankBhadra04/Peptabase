@@ -10,7 +10,7 @@
       window.onload = function() {
         const authToken = localStorage.getItem('authtoken');
         if (!authToken) {
-          window.location.href = '/pages/admin/admin.html'; // Redirect to the login page
+          window.location.href = '/static/admin.html'; // Redirect to the login page
         }
       }
     </script>
@@ -23,16 +23,16 @@
             <h1>Peptamer Database</h1>
         </div>
         <div class="m_navbar">
-            <a href="/" rel="noreferrer">Home</a>
-            <a href="/pages/about/about.html" rel="noreferrer">About Us</a>
-            <a href="/pages/submit/submit.html" rel="noreferrer">Submit</a>
-            <a href="/pages/contact/contact.html"  rel="noreferrer">Contact Us</a>
-            <a href="/pages/admin/admin.html"  rel="noreferrer">Admin Login</a>
+            <a href="/" rel="noreferrer" >Home</a>
+            <a href="/static/about.html" rel="noreferrer">About Us</a>
+            <a href="/static/submit.html" rel="noreferrer">Submit</a>
+            <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
+            <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
         </div>
 
         <!-- Table will be populated by JavaScript -->
         <div>
-            <a href="/pages/add/add.html">
+            <a href="/static/add.html">
             <button  style="background-color: #007bff; color: #fff; padding: 10px 20px; font-size: 16px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s;">
                 Add
             </button>
@@ -59,6 +59,6 @@
         </div>
     </div>
 
-    <script src="database.js"></script>
+    <script src="/static/database.js"></script>
 </body>
 </html>
