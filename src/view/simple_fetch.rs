@@ -29,7 +29,7 @@ pub async fn fetch(pool: web::Data<AppState>) -> HttpResponse {
         }
     }
 }
-pub async fn fetch_admin(pool: web::Data<AppState>, _: JwToken) -> HttpResponse {
+pub async fn fetch_admin(pool: web::Data<AppState>, jwt: JwToken) -> HttpResponse {
     let todo: Vec<Entry> = sqlx::query_as("SELECT * FROM aptamers ORDER BY aptamer ASC")
         .fetch_all(&pool.pool)
         .await

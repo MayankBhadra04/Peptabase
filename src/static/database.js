@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function fetchAndPopulateData() {
-      fetch(`https://aptabase.shuttleapp.rs/v1/fetchadmin`, {
+      const authToken = localStorage.getItem('authtoken');
+      fetch(`https://aptabase.shuttleapp.rs/v1/adminfetch/fetchadmin`, {
           headers: {
               'Authorization': `Bearer ${authToken}`
           }
       })
       .then(response => {
+          console.log(response);
           if (!response.ok) {
               throw new Error('Network response was not ok');
           }
@@ -25,12 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
           tableBody.innerHTML = ''; // Clear existing table rows
 
           // Populate table with fetched data
-       // Inside the fetchAndPopulateData function
+          // Inside the fetchAndPopulateData function
+
+
 
 // Populate table with fetched data
-function handleEdit(itemId) {
-    window.location.href = `/static/edit.html/${itemId}`;
-}
 
 
                     data.forEach(item => {
@@ -81,4 +82,8 @@ function handleEdit(itemId) {
           console.error('Error performing action:', error);
       });
   }
+    function handleEdit(itemId) {
+        window.location.href = `/static/edit.html/${itemId}`;
+    }
+
 });

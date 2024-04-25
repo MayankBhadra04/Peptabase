@@ -14,5 +14,5 @@ pub fn view_config (cfg: &mut web::ServiceConfig) {
         .service(insert_approval)
         .service(fetch_keyword)
         .route("/comment", web::post().to(insert_comment))
-        .route("/fetchadmin", web::get().to(fetch_admin));
+        .route("/adminfetch/fetchadmin", web::get().to(fetch_admin));
 }
