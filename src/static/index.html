@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/static/index.css">
-    <title>Aptabase</title>
-    <style>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/static/index.css">
+  <title>Aptabase</title>
+  <style>
       /* Inline CSS for responsive images */
       .m_fakeimg {
         background-color: white;
@@ -18,13 +19,14 @@
         max-width: 100%; /* Max width for responsiveness */
         height: 100%; /* Auto height to maintain aspect ratio */
       }
-    </style>
-  </head>
-  <body>
-    <u></u>
+  </style>
+</head>
 
-    <div>
-      <div class="m_header">
+<body>
+  <u></u>
+
+  <div>
+    <div class="m_header">
         <h1>Peptamer Database</h1>
       </div>
       <div class="m_navbar">
@@ -34,81 +36,112 @@
         <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
         <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
       </div>
-      
-      <div class="m_main">
-        <div class="m_fakeimg" style="height: 400px"> 
-          <a href="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg">
-            <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg" alt="Medical Biology Image">
+<!-- 
+   
+    <header>
+      <div class="container">
+          <a href="/" class="logo">
+              <span class="logo-icon">></span>
+              <span>future</span>
           </a>
-          <!-- Second Image with link -->
-          <a href="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric=">
-            <img src="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric=" alt="Second Image">
-          </a>
-        </div>
-        <br />
-        <h2>Search The Database</h2>
-        <div class="search-container">
-          <form id="search-form" class="search-form">
-            <div class="form-group">
-              <label for="m_AptamerType" class="form-label">Aptamer Type</label>
-              <select id="m_AptamerType" name="AptamerType" class="form-control">
-                <option value="All">All</option>
-                <option value="Anticancer">AntiCancer</option>
-                <option value="Antiviral">Antiviral</option>
-                <option value="Diagnostics">Diagnostics</option>
-                <option value="PlantGenomics">PlantGenomics</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-        
-            <div class="form-group">
-              <label for="m_SortBy" class="form-label">Sort By</label>
-              <select id="m_SortBy" name="SortBy" class="form-control">
-                <option value="Length (low-high)">Length (low-high)</option>
-                <option value="Length (high-low)">Length (high-low)</option>
-                <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
-                <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
-              </select>
-            </div>
-        
-            <div class="form-group">
-              <label for="m_Show" class="form-label">Show</label>
-              <select id="m_Show" name="Show" class="form-control">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          
-        
-            <button type="submit" class="btn">Submit</button>
-          </form>
-          <div class="OR">
-            OR
+          <input type="checkbox" id="navbar-open" class="navbar-toggle-input">
+          <label for="navbar-open" class="navbar-toggle-label">
+              <span class="sr-only">Toggle Navigation</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512">
+                  <path fill="currentColor" d="M0 96c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm448 160c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h384c17.7 0 32 14.3 32 32z"/>
+              </svg>
+          </label>
+          <nav>
+              <ul>
+                  <li><a href="#">Pricing</a></li>
+                  <li><a href="#">Demo</a></li>
+                  <li><a href="#">Support</a></li>
+                  <li><a href="#" class="login-btn">Login</a></li>
+              </ul>
+          </nav>
+      </div>
+  </header>
+-->
+
+    <div class="m_main">
+      <div class="m_fakeimg" style="height: 400px">
+        <a href="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg">
+          <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg"
+            alt="Medical Biology Image">
+        </a>
+        <!-- Second Image with link -->
+        <a
+          href="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric=">
+          <img
+            src="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric="
+            alt="Second Image">
+        </a>
+      </div>
+      <br />
+      <h2>Search The Database</h2>
+      <div class="search-container">
+        <form id="search-form" class="search-form">
+          <div class="form-group">
+            <label for="m_AptamerType" class="form-label">Aptamer Type</label>
+            <select id="m_AptamerType" name="AptamerType" class="form-control">
+              <option value="All">All</option>
+              <option value="Anticancer">AntiCancer</option>
+              <option value="Antiviral">Antiviral</option>
+              <option value="Diagnostics">Diagnostics</option>
+              <option value="PlantGenomics">PlantGenomics</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
-          <form id="keyword-form" class="search-form">
-           
-        
-            <div class="form-group">
-              <label for="m_Show" class="form-label">Search By Keyword</label>
-              <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
-            </div>
-        
-            <button type="submit" class="btn">Submit</button>
-          </form>
-        
-          <div class="results" style="overflow-x: auto;">
-            <h2>Search Results</h2>
-            <ul id="search-results">
-            </ul>
+
+          <div class="form-group">
+            <label for="m_SortBy" class="form-label">Sort By</label>
+            <select id="m_SortBy" name="SortBy" class="form-control">
+              <option value="Length (low-high)">Length (low-high)</option>
+              <option value="Length (high-low)">Length (high-low)</option>
+              <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
+              <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
+            </select>
           </div>
+
+          <div class="form-group">
+            <label for="m_Show" class="form-label">Show</label>
+            <select id="m_Show" name="Show" class="form-control">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+
+
+          <button type="submit" class="btn">Submit</button>
+        </form>
+        <div class="OR">
+          OR
         </div>
-        
+        <form id="keyword-form" class="search-form">
+
+
+          <div class="form-group">
+            <label for="m_Show" class="form-label">Search By Keyword</label>
+            <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
+          </div>
+
+          <button type="submit" class="btn">Submit</button>
+        </form>
+
+        <div class="results" style="overflow-x: auto;">
+          <h2>Search Results</h2>
+          <ul id="search-results">
+          </ul>
+        </div>
+      </div>
+
     </div>
 
-<!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
 
     <script src="/static/search.js" defer></script>
-  </body>
+</body>
+
 </html>
