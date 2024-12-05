@@ -2,16 +2,17 @@
     box-sizing: border-box;
   }
   body {
-    font-family: 'Pacifico', cursive;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    background-image: url('https://img.pikbest.com/ai/illus_our/20230428/fa13f582ffeb52f3559bfe041c588d24.jpg!w700wp');
+    /* background-image: url('https://img.pikbest.com/ai/illus_our/20230428/fa13f582ffeb52f3559bfe041c588d24.jpg!w700wp'); */
     background-size: cover;
     background-attachment: fixed;
-    color: #333;
+    /* background: linear-gradient(to bottom, #3d034a, #3c0648, #3c1047); */
+    background: linear-gradient(to bottom, #2b0135, #380344, #3a0c46);
   }
 
   .m_header {
-    background: #4a148c; 
+    background: #4a148c;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -41,14 +42,16 @@
   }
   
   .contact {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    background-color: rgb(237, 221, 219);
+    /* background-color: rgb(237, 221, 219); */
+    /* background: linear-gradient(to bottom, #f7ebe9, #d1a6a2); */
+    background: linear-gradient(to bottom, #600976, #701f85, #7c2d90);
     border-radius: 30px;
     padding: 20px;
     margin: 20px auto;
     max-width: 640px;
     transition: transform 0.8s ease;
-    text-align: center;
+    /* text-align: center; */
+    margin-top: 50px;
     margin-bottom: 60px;
   }
 
@@ -58,22 +61,32 @@
   }
 
   .contact h2 {
-    color: #4a148c;
+    color: white;
     font-size: 2.5em;
+    padding-left: 10px;
+    padding: 5px 5px;
     margin-bottom: 10px;
+    border-radius: 10px;
     margin-top: 10px;
+    margin-left: 125px;
+    margin-right: 165px;
   }
   .contact p {
-    color: #333;
+    color: white;
+    line-height: 1.75;
     font-size: 1.5em;
     margin: 15px 0;
+  }
+  .contact strong {
+    padding: 5px 5px;
+    border-radius: 10px;
   }
   .contact p strong {
     font-weight: bold;
   }
-  
   .user-comments {
-    background-color: rgb(237, 221, 219);
+    /* background-color: rgb(237, 221, 219); */
+    background: linear-gradient(to bottom, #600976, #701f85, #7c2d90);
     border-radius: 30px;
     padding: 20px;
     max-width: 650px;
@@ -87,7 +100,12 @@
   }
   .user-comments h2 {
     font-size: 2.5em;
-    color: #4a148c;
+    color: white;
+    border-radius: 10px;
+    margin-right: 100px;
+    padding: 5px 5px;
+    padding-left: 10px;
+    line-height: 1.6;
     margin-bottom: 15px;
     margin-left: 100px;
     margin-top: 10px;
@@ -104,22 +122,25 @@
   label {
     display: block;
     font-weight: bold;
-    color: #4a148c;
+    color: white;
+    line-height: 1.6;
     margin-bottom: 5px;
   }
   input[type="email"],
   textarea {
     width: 100%;
     padding: 10px;
+    background-color: #d579ec;
+    color: white;
     border: 1px solid #4a148c;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   textarea:focus, #user-email:focus {
     outline: none;
-    border-color: purple;
+    border: 2.6px solid rgb(62, 124, 217);
   }
 
   button {
@@ -127,12 +148,12 @@
     background-color: #4a148c;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   button:hover {
-    background-color: #6a1b9a;
+    background-color: #2d085b;
   }
   
   @media screen and (max-width: 768px) {
@@ -143,7 +164,7 @@
     .user-comments {
       padding: 15px;
     }
-  }
+  } 
   
   @media screen and (max-width: 576px) {
     .m_header h1 {

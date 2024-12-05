@@ -1,259 +1,291 @@
-* {
-  box-sizing: border-box;
-}
+/* Global Styles */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-.m_header {
-  background: blueviolet;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-.m_header h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  text-transform: uppercase;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .m_header {
-      padding: 15px;
-  }
-
-  .m_header h1 {
-      font-size: 2.5em;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .m_header {
-      padding: 10px;
-  }
-
-  .m_header h1 {
-      font-size: 2em;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .m_header h1 {
-      font-size: 1.8em;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .m_header h1 {
-      font-size: 1.6em;
-  }
-}
-
-/* -------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-.m_navbar {
-  overflow: hidden;
-  background-color: #333;
-  display: flex;
-  justify-content: center;
-}
-
-.m_navbar a {
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  padding: 14px 20px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.m_navbar a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.m_navbar a.m_right {
-  margin-left: auto;
-}
-
-.m_navbar a.m_active {
-  background-color: #666;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .m_navbar {
-      flex-wrap: wrap;
-  }
-  
-  .m_navbar a {
-      width: 100%;
-      margin: 5px 0;
-  }
-
-  .m_navbar a.m_right {
-      margin-left: 0;
-      margin-top: 5px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-.m_navbar a {
-  float: none;
-  width: 100%;
-}
-}
-
-
-
-/* ---------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-
-
-.m_row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.m_side {
-  background-color: #f1f1f1;
-  padding: 20px;
-  flex: 0 0 25%; /* Adjust width as needed */
-}
-
-.m_main {
-  background-color: white;
-  padding: 20px;
-  flex: 0 0 75%; /* Adjust width as needed */
-}
-
-.m_fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box; /* Ensure padding is included in width */
-}
-
-.m_footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .m_side, .m_main {
-      flex: 0 0 100%;
-  }
-}
-/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
-  select {
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-  }
-/* ---------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-  
-
-
-  /* --------------------------------------------------------------------------------------------------------------------------------------- */
-
-  /* Base styles */
-body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-}
-
-/* Form container */
-.form-container {
-  width: 400px; /* Adjust width as needed */
-  margin: 50px auto; /* Center the form horizontally */
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Aptamer query form */
-.aptamer-query-form {
+  background: linear-gradient(135deg, #0b0d17 0%, #3a1d5a 100%);
+  color: #ffffff;
+  line-height: 1.6;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Form group */
-.form-group {
-  margin-bottom: 15px;
+/* Header */
+.m_header {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.m_header h1 {
+  font-size: 2.5em;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInDown 0.5s ease-out;
+}
+
+/* Navigation Bar */
+.m_navbar {
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Form label */
+.m_navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 1em;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.m_navbar a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.m_navbar a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.m_navbar a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Form Container */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.aptamer-query-form h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Fields */
+.form-group {
+  margin-bottom: 25px;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
 .form-label {
-  width: 120px; /* Adjust label width as needed */
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
-  margin-right: 10px;
+  color: #ddd;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Form control (input and textarea) */
 .form-control {
-  flex: 1; /* Take up remaining space */
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
-}
-
-
-/* Textarea */
-.form-control[type="textarea"] {
-  box-sizing: border-box;
-  padding: 0; /* Remove any default padding */
-  margin: 0; /* Remove any default margin */
-  height: 100px; /* Adjust height as needed */
-  max-width: 300px; /* Adjust as needed */
-}
-
-/* Submit button */
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
+  width: 100%;
+  padding: 12px;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Textarea */
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 200px;
+}
+
+/* Submit Button */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  color: white;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
   cursor: pointer;
-  background-color: #3498db; /* Adjust color as needed */
-  color: #fff; /* Text color */
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
-  background-color: #2980b9; /* Darker shade on hover */
+  background: linear-gradient(45deg, #2575fc, #6a11cb);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.textarea{
-  box-sizing: border-box;
-  padding: 0; /* Remove any default padding */
-  margin: 0; /* Remove any default margin */
-  height: 100px; /* Adjust height as needed */
-  max-width: 50px; /* Adjust as needed */
+.btn:active {
+  transform: translateY(1px);
 }
 
-  /* --------------------------------------------------------------------------------------------------------------------------------------- */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .form-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .m_navbar {
+    flex-wrap: wrap;
+  }
+
+  .m_navbar a {
+    margin: 5px;
+  }
+
+  .m_header h1 {
+    font-size: 2em;
+  }
+
+  .aptamer-query-form h2 {
+    font-size: 1.8em;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Accessibility Improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid #00b4d8;
+  outline-offset: 2px;
+}
