@@ -223,10 +223,8 @@ textarea.form-control {
 }
 
 /* Focus styles for keyboard navigation */
-a:focus,
 input:focus,
-textarea:focus,
-button:focus {
+textarea:focus {
   outline: 2px solid #00b4d8;
   outline-offset: 2px;
 }
