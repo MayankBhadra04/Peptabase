@@ -3,30 +3,19 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="/static/index.css">
+  <link rel="stylesheet" href="index.css">
   <title>Aptabase</title>
   <style>
-      /* Inline CSS for responsive images */
-      .m_fakeimg {
-        background-color: white;
-        display: flex;
-        justify-content: space-around;
-      }
-      .m_fakeimg img {
-        border: 2px solid #ddd; /* Border style */
-        border-radius: 8px; /* Border radius */
-        width: 900px;
-        max-width: 100%; /* Max width for responsiveness */
-        height: 100%; /* Auto height to maintain aspect ratio */
-      }
+    
   </style>
 </head>
 
-<body>
-  <u></u>
 
-  <div>
-    <div class="m_header">
+<body>
+  <!-- <u></u>
+
+  <div class="background">
+     <div class="m_header">
         <h1>Peptamer Database</h1>
       </div>
       <div class="m_navbar">
@@ -35,14 +24,14 @@
         <a href="/static/submit.html" rel="noreferrer">Submit</a>
         <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
         <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
-      </div>
-<!-- 
+      </div> 
+
    
     <header>
       <div class="container">
           <a href="/" class="logo">
               <span class="logo-icon">></span>
-              <span>future</span>
+              <span>AptaBase</span>
           </a>
           <input type="checkbox" id="navbar-open" class="navbar-toggle-input">
           <label for="navbar-open" class="navbar-toggle-label">
@@ -61,7 +50,7 @@
           </nav>
       </div>
   </header>
--->
+
 
     <div class="m_main">
       <div class="m_fakeimg" style="height: 400px">
@@ -69,7 +58,7 @@
           <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg"
             alt="Medical Biology Image">
         </a>
-        <!-- Second Image with link -->
+        
         <a
           href="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric=">
           <img
@@ -137,8 +126,83 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
+
+    <header>
+      <nav>
+          <a href="#" class="logo">Aptabase</a>
+          <ul>
+              <li><a href="/" rel="noreferrer" >Home</a></li>
+              <li><a href="about.html" rel="noreferrer">About Us</a></li>
+              <li> <a href="/static/submit.html" rel="noreferrer">Submit</a></li>
+              <li><a href="/static/contact.html"  rel="noreferrer">Contact Us</a></li>
+              <li><a href="/static/admin.html" class="login-btn" rel="noreferrer">Admin Login</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <main>
+      <div class="hero">
+          <div class="hero-content">
+              <h1>Discover Aptamers</h1>
+              <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application criteria for faster, more accurate research insights.</p>
+          </div>
+          <div class="hero-image">
+              <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg" alt="Aptamer Visualization">
+          </div>
+        </div>
+      <h2 class="heading">Search The Database</h2>
+      <div class="search-container">
+          <form id="search-form" class="search-form">
+              <div class="form-group">
+                  <label for="m_AptamerType" class="form-label">Aptamer Type</label>
+                  <select id="m_AptamerType" name="AptamerType" class="form-control">
+                      <option value="All">All</option>
+                      <option value="Anticancer">AntiCancer</option>
+                      <option value="Antiviral">Antiviral</option>
+                      <option value="Diagnostics">Diagnostics</option>
+                      <option value="PlantGenomics">PlantGenomics</option>
+                      <option value="Other">Other</option>
+                  </select>
+              </div>
+      
+              <div class="form-group">
+                  <label for="m_SortBy" class="form-label">Sort By</label>
+                  <select id="m_SortBy" name="SortBy" class="form-control">
+                      <option value="Length (low-high)">Length (low-high)</option>
+                      <option value="Length (high-low)">Length (high-low)</option>
+                      <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
+                      <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
+                  </select>
+              </div>
+      
+              <div class="form-group">
+                  <label for="m_Show" class="form-label">Show</label>
+                  <select id="m_Show" name="Show" class="form-control">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                  </select>
+              </div>
+      
+              <button type="submit" class="btn">Submit</button>
+          </form>
+          <div class="or">OR</div>
+          <form id="keyword-form" class="search-form">
+              <div class="form-group">
+                  <label for="keyword" class="form-label">Search By Keyword</label>
+                  <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
+              </div>
+              <button type="submit" class="btn">Submit</button>
+          </form>
+          <div class="results">
+              <h2>Search Results</h2>
+              <ul id="search-results"></ul>
+          </div>
+      </div>
+  </main>
     <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
 
     <script src="/static/search.js" defer></script>

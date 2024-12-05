@@ -2,14 +2,13 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="/static/about.css">
+  <link rel="stylesheet" href="about.css"> <!-- static removed-->
   <title>Aptabase</title>
 </head>
 <body>
-<u></u>
 
-<div>
-  <div class="m_header">
+
+  <!-- <div class="m_header">
     <h1>Peptamer Database</h1>
   </div>
   <div class="m_navbar">
@@ -18,43 +17,54 @@
     <a href="/static/submit.html" rel="noreferrer">Submit</a>
     <a href="/static/contact.html"  rel="noreferrer">Contact Us</a>
     <a href="/static/admin.html" rel="noreferrer">Admin Login</a>
-  </div>
-
+  </div> -->
+  <header>
+    <nav>
+        <a href="#" class="logo">Aptabase</a>
+        <ul>
+            <li><a href="/" rel="noreferrer" >Home</a></li>
+            <li><a href="/static/about.html" rel="noreferrer">About Us</a></li>
+            <li> <a href="/static/submit.html" rel="noreferrer">Submit</a></li>
+            <li><a href="/static/contact.html"  rel="noreferrer">Contact Us</a></li>
+            <li><a href="/static/admin.html" class="login-btn" rel="noreferrer">Admin Login</a></li>
+        </ul>
+    </nav>
+</header>
 
 
   <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
   <div class="m_main">
     <div class="container">
       <div class="header">
-        <h2>PeptamerDatabase</h2>
-        <h5>This is a Comprehensive database of all Peptide Aptamers</h5>
+        <h2>Peptamer Database</h2>
+        <h5>A Comprehensive Database of All Peptide Aptamers</h5>
       </div>
-
+  
       <div class="description">
         <p>
-          This database was developed under the guidance of Prof Amit Kumar by the students of the dept of BSBE in collaboration with the dept of CSE.
+          This database was developed under the guidance of <strong>Prof. Amit Kumar</strong> by the students of the Department of BSBE in collaboration with the Department of CSE.
         </p>
-        <p>
-          Contributors are as follows
-        </p>
+        <p>Contributors are as follows:</p>
       </div>
+  
       <div class="contrib">
         <div class="contributor">
-          <img src="contributor1_image.jpg" alt="Contributor 1 Image">
+          <img src="https://via.placeholder.com/150" alt="Contributor 1 Image">
           <h3>Contributor 1 Name</h3>
           <p>Designation</p>
         </div>
         <div class="contributor">
-          <img src="contributor2_image.jpg" alt="Contributor 2 Image">
+          <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
           <h3>Contributor 2 Name</h3>
           <p>Designation</p>
         </div>
       </div>
     </div>
   </div>
+  
 
 
 
-</div>
+
 </body>
 </html>
