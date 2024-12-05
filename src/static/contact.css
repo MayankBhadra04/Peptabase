@@ -8,8 +8,8 @@
     background-size: cover;
     background-attachment: fixed;
     /* background: linear-gradient(to bottom, #3d034a, #3c0648, #3c1047); */
-    background: linear-gradient(to bottom, #2b0135, #380344, #3a0c46);
-  }
+    background: radial-gradient(125% 125% at 50% 20%, #000 30%, #63e 100%);
+    }
 
   .m_header {
     background: #4a148c;
@@ -44,14 +44,15 @@
   .contact {
     /* background-color: rgb(237, 221, 219); */
     /* background: linear-gradient(to bottom, #f7ebe9, #d1a6a2); */
-    background: linear-gradient(to bottom, #600976, #701f85, #7c2d90);
+    background: linear-gradient(to top, #6023e4, #7856d0);
+    backdrop-filter: blur(50px);
     border-radius: 30px;
     padding: 20px;
-    margin: 20px auto;
+    margin: 100px auto ;
     max-width: 640px;
     transition: transform 0.8s ease;
     /* text-align: center; */
-    margin-top: 50px;
+    margin-top: 90px;
     margin-bottom: 60px;
   }
 
@@ -86,7 +87,7 @@
   }
   .user-comments {
     /* background-color: rgb(237, 221, 219); */
-    background: linear-gradient(to bottom, #600976, #701f85, #7c2d90);
+    background: linear-gradient(to top, #6023e4, #bca9e4);
     border-radius: 30px;
     padding: 20px;
     max-width: 650px;
@@ -130,7 +131,7 @@
   textarea {
     width: 100%;
     padding: 10px;
-    background-color: #d579ec;
+    background-color: #ffffff;
     color: white;
     border: 1px solid #4a148c;
     border-radius: 5px;
@@ -175,4 +176,57 @@
       padding: 12px;
     }
   }
+  /*Header css*/
+  header {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
   
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    gap: 2rem;
+  }
+  
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #fff;
+  }
+  
+  .login-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
