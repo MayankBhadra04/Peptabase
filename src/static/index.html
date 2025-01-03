@@ -1,18 +1,275 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="index.css">
-  <title>Aptabase</title>
-  <style>
-    
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptabase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: radial-gradient(125% 125% at 50% 20%, #000 30%, #63e 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        .login-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .heading {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 3rem 0;
+            letter-spacing: -0.5px;
+        }
+
+        .search-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .form-control {
+            padding: 0.875rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .or {
+            text-align: center;
+            font-weight: 600;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .or::before,
+        .or::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .or::before {
+            left: 0;
+        }
+
+        .or::after {
+            right: 0;
+        }
+
+        .results {
+            margin-top: 2rem;
+        }
+
+        .results h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        #search-results {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .search-container {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
-
 <body>
-  <!-- <u></u>
+
+ <!-- <u></u>
 
   <div class="background">
      <div class="m_header">
@@ -127,85 +384,86 @@
       </div>
 
     </div> -->
-
-
+  
     <header>
-      <nav>
-          <a href="#" class="logo">Aptabase</a>
-          <ul>
-              <li><a href="index.html" rel="noreferrer" >Home</a></li>
-              <li><a href="about.html" rel="noreferrer">About Us</a></li>
-              <li> <a href="submit.html" rel="noreferrer">Submit</a></li>
-              <li><a href="contact.html"  rel="noreferrer">Contact Us</a></li>
-              <li><a href="admin.html" class="login-btn" rel="noreferrer">Admin Login</a></li>
-          </ul>
-      </nav>
-  </header>
+        <nav>
+            <a href="#" class="logo">Aptabase</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="submit.html">Submit</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="admin.html" class="login-btn">Admin Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-      <div class="hero">
-          <div class="hero-content">
-              <h1>Discover Aptamers</h1>
-              <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application criteria for faster, more accurate research insights.</p>
-          </div>
-          <div class="hero-image">
-              <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg" alt="Aptamer Visualization">
-          </div>
+    <main>
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Discover Aptamers</h1>
+                <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application criteria for faster, more accurate research insights.</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg" alt="Aptamer Visualization">
+            </div>
         </div>
-      <h2 class="heading">Search The Database</h2>
-      <div class="search-container">
-          <form id="search-form" class="search-form">
-              <div class="form-group">
-                  <label for="m_AptamerType" class="form-label">Aptamer Type</label>
-                  <select id="m_AptamerType" name="AptamerType" class="form-control">
-                      <option value="All">All</option>
-                      <option value="Anticancer">AntiCancer</option>
-                      <option value="Antiviral">Antiviral</option>
-                      <option value="Diagnostics">Diagnostics</option>
-                      <option value="PlantGenomics">PlantGenomics</option>
-                      <option value="Other">Other</option>
-                  </select>
-              </div>
-      
-              <div class="form-group">
-                  <label for="m_SortBy" class="form-label">Sort By</label>
-                  <select id="m_SortBy" name="SortBy" class="form-control">
-                      <option value="Length (low-high)">Length (low-high)</option>
-                      <option value="Length (high-low)">Length (high-low)</option>
-                      <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
-                      <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
-                  </select>
-              </div>
-      
-              <div class="form-group">
-                  <label for="m_Show" class="form-label">Show</label>
-                  <select id="m_Show" name="Show" class="form-control">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                  </select>
-              </div>
-      
-              <button type="submit" class="btn">Submit</button>
-          </form>
-          <div class="or">OR</div>
-          <form id="keyword-form" class="search-form">
-              <div class="form-group">
-                  <label for="keyword" class="form-label">Search By Keyword</label>
-                  <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
-              </div>
-              <button type="submit" class="btn">Submit</button>
-          </form>
-          <div class="results">
-              <h2>Search Results</h2>
-              <ul id="search-results"></ul>
-          </div>
-      </div>
-  </main>
-    <!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+
+        <h2 class="heading">Search The Database</h2>
+        <div class="search-container">
+            <form id="search-form" class="search-form">
+                <div class="form-group">
+                    <label for="m_AptamerType" class="form-label">Aptamer Type</label>
+                    <select id="m_AptamerType" name="AptamerType" class="form-control">
+                        <option value="All">All</option>
+                        <option value="Anticancer">AntiCancer</option>
+                        <option value="Antiviral">Antiviral</option>
+                        <option value="Diagnostics">Diagnostics</option>
+                        <option value="PlantGenomics">PlantGenomics</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="m_SortBy" class="form-label">Sort By</label>
+                    <select id="m_SortBy" name="SortBy" class="form-control">
+                        <option value="Length (low-high)">Length (low-high)</option>
+                        <option value="Length (high-low)">Length (high-low)</option>
+                        <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
+                        <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="m_Show" class="form-label">Show</label>
+                    <select id="m_Show" name="Show" class="form-control">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Search Database</button>
+            </form>
+
+            <div class="or">OR</div>
+
+            <form id="keyword-form" class="search-form">
+                <div class="form-group">
+                    <label for="keyword" class="form-label">Search By Keyword</label>
+                    <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
+                </div>
+                <button type="submit" class="btn">Search by Keyword</button>
+            </form>
+
+            <div class="results">
+                <h2>Search Results</h2>
+                <ul id="search-results"></ul>
+            </div>
+        </div>
+    </main>
 
     <script src="/static/search.js" defer></script>
 </body>
-
 </html>
