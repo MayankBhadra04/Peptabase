@@ -12,7 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 150vh;
 }
 
 .m_main {
@@ -36,6 +36,9 @@ body {
 
 .container {
   text-align: center;
+}
+.about-head{
+  margin-top: 20px;
 }
 
 .header h2 {
