@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Get keyword input
     const keyword = document.getElementById('keyword').value.toLowerCase();
-    fetch(`https://aptabase.shuttleapp.rs/v1/fetch/${keyword}`)
+    fetch(`https://peptabase-ixik.shuttle.app/v1/fetch/${keyword}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show = document.getElementById('m_Show').value;
 
     if (aptamerType === 'All') {
-      fetch(`https://aptabase.shuttleapp.rs/v1/fetch`)
+      fetch(`https://peptabase-ixik.shuttle.app/v1/fetch`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         sequence: ''
       };
       console.log(JSON.stringify(requestBody));
-      fetch('https://aptabase.shuttleapp.rs/v1/fetchsingle', {
+      fetch('https://peptabase-ixik.shuttle.app/v1/fetchsingle', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
