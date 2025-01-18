@@ -612,18 +612,45 @@ nav a:hover {
 }
 
 
+/* search-container new styless */
 
 .search-container {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  width: 80%;
+  width: 100%;
+  max-width: 1200px; /* Adjust max width as needed */
   margin: 0 auto;
-  padding: 30px;
+  padding: 60px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
+  overflow-x: auto; /* Enable horizontal scrolling for large tables */
 }
+
+.search-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.search-table th, 
+.search-table td {
+  padding: 12px 15px;
+  text-align: left; /* Align text to the left */
+  border: 1px solid #ddd;
+}
+
+.search-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.search-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.search-table tr:hover {
+  background-color: #f1f1f1;
+}
+
 
 .search-form {
   display: flex;

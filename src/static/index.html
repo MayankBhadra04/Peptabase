@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -152,7 +153,8 @@
             flex-direction: column;
             gap: 0.5rem;
         }
-        .form-group-2{
+
+        .form-group-2 {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
@@ -179,7 +181,8 @@
             border-color: #007bff;
             background-color: rgba(255, 255, 255, 0.15);
         }
-        .form-color{
+
+        .form-color {
             color: #000;
         }
 
@@ -244,6 +247,7 @@
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
+                margin-top: 5rem;
             }
 
             .hero-content {
@@ -273,11 +277,75 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /*** header responsive ***/
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            position: absolute;
+            /* Position it relative to the screen */
+            top: 1.5rem;
+            /* Adjust vertical alignment */
+            right: 1.5rem;
+            /* Move it to the right */
+        }
+
+        .menu-toggle .bar {
+            height: 3px;
+            width: 25px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style-type: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                background-color: rgba(0, 0, 0, 0.8);
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
+                display: none;
+                z-index: 100;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-list.active {
+                display: flex;
+            }
+
+            nav a {
+                color: #fff;
+            }
+        }
     </style>
 </head>
+
 <body>
 
- <!-- <u></u>
+    <!-- <u></u>
 
   <div class="background">
      <div class="m_header">
@@ -392,11 +460,16 @@
       </div>
 
     </div> -->
-  
+
     <header>
         <nav>
             <a href="#" class="logo">Aptabase</a>
-            <ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="submit.html">Submit</a></li>
@@ -406,14 +479,17 @@
         </nav>
     </header>
 
+
     <main>
         <div class="hero">
             <div class="hero-content">
                 <h1>Discover Aptamers</h1>
-                <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application criteria for faster, more accurate research insights.</p>
+                <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application
+                    criteria for faster, more accurate research insights.</p>
             </div>
             <div class="hero-image">
-                <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg" alt="Aptamer Visualization">
+                <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg"
+                    alt="Aptamer Visualization">
             </div>
         </div>
 
@@ -424,7 +500,7 @@
                     <label for="m_AptamerType" class="form-label">Aptamer Type</label>
                     <select id="m_AptamerType" name="AptamerType" class="form-control">
                         <option value="All" class="form-color">All</option>
-                        <option value="Anticancer" class="form-color"  >AntiCancer</option>
+                        <option value="Anticancer" class="form-color">AntiCancer</option>
                         <option value="Antiviral" class="form-color">Antiviral</option>
                         <option value="Diagnostics" class="form-color">Diagnostics</option>
                         <option value="PlantGenomics" class="form-color">PlantGenomics</option>
@@ -458,13 +534,15 @@
             <div class="or">OR</div>
 
             <form id="keyword-form" class="search-form">
-                <div   >
-                <div class="form-group">
-                    <label for="keyword" class="form-label">Search By Keyword</label></div>
+                <div>
+                    <div class="form-group">
+                        <label for="keyword" class="form-label">Search By Keyword</label>
+                    </div>
                     <div class="form-group form-group-2">
-                    <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
-                <button type="submit" class="btn">Search by Keyword</button></div>
-            </div>
+                        <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
+                        <button type="submit" class="btn">Search by Keyword</button>
+                    </div>
+                </div>
             </form>
 
             <div class="results">
@@ -473,7 +551,14 @@
             </div>
         </div>
     </main>
+    <script>
+        document.getElementById("mobile-menu").addEventListener("click", function () {
+            const navList = document.querySelector(".nav-list");
+            navList.classList.toggle("active");
+        });
+    </script>
 
     <script src="search.js" defer></script>
 </body>
+
 </html>

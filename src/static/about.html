@@ -1,9 +1,73 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="about.css"> <!-- static removed-->
   <title>Aptabase</title>
+  <style>
+     .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            position: absolute;
+            /* Position it relative to the screen */
+            top: 1.5rem;
+            /* Adjust vertical alignment */
+            right: 1.5rem;
+            /* Move it to the right */
+        }
+
+        .menu-toggle .bar {
+            height: 3px;
+            width: 25px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style-type: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                background-color: rgba(0, 0, 0, 0.8);
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
+                display: none;
+                z-index: 100;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-list.active {
+                display: flex;
+            }
+
+            nav a {
+                color: #fff;
+            }
+        }
+  </style>
 </head>
 <body>
 
@@ -21,18 +85,24 @@
 
   <!--static is removed-->
   <div>
-  <header>
-    <nav>
-        <a href="#" class="logo">Aptabase</a>
-        <ul>
-            <li><a href="index.html" rel="noreferrer" >Home</a></li>
-            <li><a href="about.html" rel="noreferrer">About Us</a></li>
-            <li> <a href="submit.html" rel="noreferrer">Submit</a></li>
-            <li><a href="contact.html"  rel="noreferrer">Contact Us</a></li>
-            <li><a href="admin.html" class="login-btn" rel="noreferrer">Admin Login</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+      <nav>
+          <a href="#" class="logo">Aptabase</a>
+          <div class="menu-toggle" id="mobile-menu">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+          </div>
+          <ul class="nav-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="submit.html">Submit</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="admin.html" class="login-btn">Admin Login</a></li>
+          </ul>
+      </nav>
+  </header>
+
 
 
   <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -94,7 +164,12 @@
 
 
 </div>
-
+<script>
+  document.getElementById("mobile-menu").addEventListener("click", function () {
+      const navList = document.querySelector(".nav-list");
+      navList.classList.toggle("active");
+  });
+</script>
 </body>
 
 </html>
