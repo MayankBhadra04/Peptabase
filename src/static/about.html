@@ -1,175 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="about.css"> <!-- static removed-->
-  <title>Aptabase</title>
-  <style>
-     .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            position: absolute;
-            /* Position it relative to the screen */
-            top: 1.5rem;
-            /* Adjust vertical alignment */
-            right: 1.5rem;
-            /* Move it to the right */
-        }
-
-        .menu-toggle .bar {
-            height: 3px;
-            width: 25px;
-            background-color: #fff;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-list {
-            display: flex;
-            list-style-type: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        @media screen and (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-list {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-                background-color: rgba(0, 0, 0, 0.8);
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem;
-                display: none;
-                z-index: 100;
-                transition: max-height 0.3s ease;
-            }
-
-            .nav-list.active {
-                display: flex;
-            }
-
-            nav a {
-                color: #fff;
-            }
-        }
-  </style>
+  <title>Peptabase</title>
+  <link rel="stylesheet" href="about.css">
 </head>
+
 <body>
-
-
-  <!-- <div class="m_header">
-    <h1>Peptamer Database</h1>
-  </div>
-  <div class="m_navbar">
-    <a href="/" rel="noreferrer" >Home</a>
-    <a href="about.html" rel="noreferrer">About Us</a>
-    <a href="submit.html" rel="noreferrer">Submit</a>
-    <a href="contact.html"  rel="noreferrer">Contact Us</a>
-    <a href="admin.html" rel="noreferrer">Admin Login</a>
-  </div> -->
-
-  <!--static is removed-->
-  <div>
-    <header>
-      <nav>
-          <a href="#" class="logo">Aptabase</a>
-          <div class="menu-toggle" id="mobile-menu">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-          </div>
-          <ul class="nav-list">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="submit.html">Submit</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-              <li><a href="admin.html" class="login-btn">Admin Login</a></li>
-          </ul>
-      </nav>
-  </header>
-
-
-
-  <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
-  <div class="m_main">
-    <div class="container">
-      <div class="header">
-        <h2>Peptamer Database</h2>
-        <h5>A Comprehensive Database of All Peptide Aptamers</h5>
+  <nav class="navbar">
+    <div class="nav-content">
+      <h1 class="logo">Peptabase</h1>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="submit.html" class="nav-link">Submit</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+        <a href="admin.html" class="login-btn">Admin Login</a>
       </div>
-  
-      <div class="description">
-        <p>
-          This database was developed under the guidance of <strong>Prof. Amit Kumar</strong> by the students of the Department of BSBE in collaboration with the Department of CSE.
-        </p>
-        <p>Contributors are as follows:</p>
-      </div>
-  
-      <div class="contrib">
-        <div class="contributor">
-          <img src="https://via.placeholder.com/150" alt="Contributor 1 Image">
-          <h3>Aritra Chakraborty</h3>
-          <p>Designation</p>
-        </div>
-      </div>
-      <h2 class="about-head">Web Team</h2>
-        <div class="contrib">
-          <div class="contributor">
-            <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
-            <h3>Dhrshil bhaiya </h3>
-            <p>Designation</p>
-          </div>
-          <div class="contributor">
-            <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
-            <h3>Mayank bhadra</h3>
-            <p>Designation</p>
-          </div>
-          <div class="contributor">
-            <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
-            <h3>Mohit Garhewal</h3>
-            <p>Designation</p>
-          </div>
-        </div>
-        <div class="contrib">
-          <div class="contributor">
-            <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
-            <h3>Tanmai Sai</h3>
-            <p>Designation</p>
-          </div>
-          <div class="contributor">
-            <img src="https://via.placeholder.com/150" alt="Contributor 2 Image">
-            <h3>Ayush Yadav</h3>
-            <p>Designation</p>
-          </div>
-          
-        </div>
     </div>
-  </div>
-  
+  </nav>
 
+  <main class="main-content">
+    <div class="info-section">
+      <div class="professor-section">
+        <img src="amit sir.jpg" alt="Professor" class="profile-image">
+        <div class="professor-info">
+          <p class="name">Prof. Amit Kumar</p>
+          <p class="title">Professor, Dept of BSBE</p>
+        </div>
+      </div>
+      <div class="info-text">
+        <p>This database was developed under the guidance of <strong>Prof. Amit Kumar</strong> by the students of the
+          Department of Bioscience and Biomedical Engineering in collaboration with the Department of CSE and
+          Programming Club IIT Indore.</p>
+      </div>
+    </div>
 
-</div>
-<script>
-  document.getElementById("mobile-menu").addEventListener("click", function () {
-      const navList = document.querySelector(".nav-list");
-      navList.classList.toggle("active");
-  });
-</script>
+    <section class="contributors">
+      <h2>Contributors :</h2>
+      <div class="contributors-grid">
+        <div class="contributor">
+          <img src="arithra.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Aritra Chakraborty</p>
+          <p class="contributor-title">Senior Research Fellow</p>
+          <p class="contributor-dept">Dept of BSBE</p>
+        </div>
+        <!-- Placeholder for other contributors -->
+        <div class="contributor">
+          <img src="arithra.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Darshil Patel</p>
+          <p class="contributor-title">Pre Final Yr Student</p>
+          <p class="contributor-dept">Dept of CSE</p>
+        </div>
+        <div class="contributor">
+          <img src="aayush.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Aayush Yadav</p>
+          <p class="contributor-title">Sophomore CSE</p>
+          <p class="contributor-dept">Dept of CSE</p>
+        </div>
+        <div class="contributor">
+          <img src="arithra.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Mayank Bhadra</p>
+          <p class="contributor-title">Sophomore Mech.</p>
+          <p class="contributor-dept">Dept of Mechanical</p>
+        </div>
+        <div class="contributor">
+          <img src="arithra.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Mohit</p>
+          <p class="contributor-title">Sophomore MEMS.</p>
+          <p class="contributor-dept">Dept of MEMS</p>
+        </div>
+        <div class="contributor">
+          <img src="arithra.jpg" alt="Contributor" class="contributor-image">
+          <p class="contributor-name">Tanmai Sai</p>
+          <p class="contributor-title">Sophomore CSE.</p>
+          <p class="contributor-dept">Dept of CSE</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 
 </html>
