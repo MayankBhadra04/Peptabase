@@ -30,8 +30,10 @@ body {
 
 .logo {
   font-size: 2rem;
-  font-weight: bold;
-  color: white;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
 .nav-links {

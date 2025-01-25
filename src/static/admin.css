@@ -77,7 +77,7 @@ body {
   justify-content: center;
   align-items: flex-start; /* Changed from 'center' to 'flex-start' */
   flex: 1;
-  margin-top: 90px; /* Added this to push the form box downward */
+  margin-top: 190px; /* Added this to push the form box downward */
 }
 
 form {
@@ -205,7 +205,7 @@ nav {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #fff;
   text-decoration: none;

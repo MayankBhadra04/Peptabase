@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aptabase</title>
+    <title>Peptabase</title>
     <style>
         * {
             margin: 0;
@@ -39,7 +39,7 @@
         }
 
         .logo {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
@@ -78,19 +78,52 @@
         }
 
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            min-height: 100vh;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+            margin-top: 120px;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
 
         .hero-content {
-            text-align: left;
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  font-size: 2rem;
+  line-height: 1.8;
+  color: white; /* Bright white color */
+  font-weight: bold; /* Makes the text bold */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Adds subtle shadow for better contrast */
+}
+
+
+        .hero-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
+
+        .hero-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 450px; /* Added max-width */
+            margin: 0 auto; /* Center the images */
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+
 
         .hero h1 {
             font-size: 3.5rem;
@@ -106,28 +139,11 @@
             margin-bottom: 2rem;
         }
 
-        .hero-image {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .hero-image:hover img {
-            transform: scale(1.05);
-        }
+        
 
         .heading {
             font-size: 2.5rem;
             text-align: center;
-            margin: 3rem 0;
             letter-spacing: -0.5px;
         }
 
@@ -340,130 +356,196 @@
                 color: #fff;
             }
         }
+
+        .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.welcome-section {
+    align-items: center;
+    padding: 0rem;
+}
+
+.welcome-content {
+    max-width: 600px;
+}
+
+.welcome-content h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.welcome-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+.search-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #fff;
+}
+
+.search-container {
+    padding: 1rem;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    color: #fff;
+    font-weight: 500;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 100%;
+}
+
+.form-control option {
+    background: #2d2d2d;
+    color: #fff;
+}
+
+.btn {
+    background: #007bff;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 1rem;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.divider-text {
+    color: #fff;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+.keyword-search {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.keyword-input-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.keyword-input-group input {
+    flex: 1;
+}
+
+.results {
+    margin-top: 2rem;
+}
+
+.results h2 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+#search-results {
+    list-style: none;
+    padding: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .welcome-section {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .welcome-content {
+        margin: 0 auto;
+    }
+
+    .search-section {
+        margin: 0 auto;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 640px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .keyword-input-group {
+        flex-direction: column;
+    }
+
+    .welcome-content h1 {
+        font-size: 2rem;
+    }
+
+    .heading {
+        font-size: 1.75rem;
+    }
+}
     </style>
 </head>
 
 <body>
 
-    <!-- <u></u>
-
-  <div class="background">
-     <div class="m_header">
-        <h1>Peptamer Database</h1>
-      </div>
-      <div class="m_navbar">
-        <a href="/" rel="noreferrer" >Home</a>
-        <a href="about.html" rel="noreferrer">About Us</a>
-        <a href="submit.html" rel="noreferrer">Submit</a>
-        <a href="contact.html"  rel="noreferrer">Contact Us</a>
-        <a href="admin.html" rel="noreferrer">Admin Login</a>
-      </div> 
-
-   
-    <header>
-      <div class="container">
-          <a href="/" class="logo">
-              <span class="logo-icon">></span>
-              <span>AptaBase</span>
-          </a>
-          <input type="checkbox" id="navbar-open" class="navbar-toggle-input">
-          <label for="navbar-open" class="navbar-toggle-label">
-              <span class="sr-only">Toggle Navigation</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512">
-                  <path fill="currentColor" d="M0 96c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm448 160c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h384c17.7 0 32 14.3 32 32z"/>
-              </svg>
-          </label>
-          <nav>
-              <ul>
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#">Demo</a></li>
-                  <li><a href="#">Support</a></li>
-                  <li><a href="#" class="login-btn">Login</a></li>
-              </ul>
-          </nav>
-      </div>
-  </header>
-
-
-    <div class="m_main">
-      <div class="m_fakeimg" style="height: 400px">
-        <a href="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg">
-          <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg"
-            alt="Medical Biology Image">
-        </a>
-        
-        <a
-          href="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric=">
-          <img
-            src="https://media.istockphoto.com/id/1297146235/photo/blue-chromosome-dna-and-gradually-glowing-flicker-light-matter-chemical-when-camera-moving.jpg?s=612x612&w=0&k=20&c=yjSdodXRBvtwzOYtQTqetnn3b4wWDNpF6keupxqxric="
-            alt="Second Image">
-        </a>
-      </div>
-      <br />
-      <h2>Search The Database</h2>
-      <div class="search-container">
-        <form id="search-form" class="search-form">
-          <div class="form-group">
-            <label for="m_AptamerType" class="form-label">Aptamer Type</label>
-            <select id="m_AptamerType" name="AptamerType" class="form-control">
-              <option value="All">All</option>
-              <option value="Anticancer">AntiCancer</option>
-              <option value="Antiviral">Antiviral</option>
-              <option value="Diagnostics">Diagnostics</option>
-              <option value="PlantGenomics">PlantGenomics</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="m_SortBy" class="form-label">Sort By</label>
-            <select id="m_SortBy" name="SortBy" class="form-control">
-              <option value="Length (low-high)">Length (low-high)</option>
-              <option value="Length (high-low)">Length (high-low)</option>
-              <option value="Alphabetically (a-z)">Alphabetically (a-z)</option>
-              <option value="Alphabetically (z-a)">Alphabetically (z-a)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="m_Show" class="form-label">Show</label>
-            <select id="m_Show" name="Show" class="form-control">
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-          </div>
-
-
-          <button type="submit" class="btn">Submit</button>
-        </form>
-        <div class="OR">
-          OR
-        </div>
-        <form id="keyword-form" class="search-form">
-
-
-          <div class="form-group">
-            <label for="m_Show" class="form-label">Search By Keyword</label>
-            <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
-          </div>
-
-          <button type="submit" class="btn">Submit</button>
-        </form>
-
-        <div class="results" style="overflow-x: auto;">
-          <h2>Search Results</h2>
-          <ul id="search-results">
-          </ul>
-        </div>
-      </div>
-
-    </div> -->
-
     <header>
         <nav>
-            <a href="#" class="logo">Aptabase</a>
+            <a href="#" class="logo">Peptabase</a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -481,73 +563,91 @@
 
 
     <main>
-        <div class="hero">
+
+        <section class="hero">
             <div class="hero-content">
-                <h1>Discover Aptamers</h1>
-                <p>Explore a vast collection of aptamers, categorized and searchable by type, function, and application
-                    criteria for faster, more accurate research insights.</p>
+                <p>Discover Peptide Aptamers, a better, smaller and cheaper alternative to antibodies and more versatile than regular Aptamers</p>
             </div>
-            <div class="hero-image">
-                <img src="https://www.bolton.ac.uk/assets/What-is-Medical-Biology-Bolton-Uni__ResizedImageWzYwMCwzMzhd.jpg"
-                    alt="Aptamer Visualization">
+            <div class="hero-images">
+                <div class="hero-image">
+                    <img src="Uses.jpg" alt="Peptide uses visualization" loading="lazy">
+                </div>
+                <div class="hero-image">
+                    <img src="Structure.jpg" alt="Peptide structure visualization" loading="lazy">
+                </div>
             </div>
-        </div>
+        </section>
 
-        <h2 class="heading">Search The Database</h2>
-        <div class="search-container">
-            <form id="search-form" class="search-form">
-                <div class="form-group">
-                    <label for="m_AptamerType" class="form-label">Aptamer Type</label>
-                    <select id="m_AptamerType" name="AptamerType" class="form-control">
-                        <option value="All" class="form-color">All</option>
-                        <option value="Anticancer" class="form-color">AntiCancer</option>
-                        <option value="Antiviral" class="form-color">Antiviral</option>
-                        <option value="Diagnostics" class="form-color">Diagnostics</option>
-                        <option value="PlantGenomics" class="form-color">PlantGenomics</option>
-                        <option value="Other" class="form-color">Other</option>
-                    </select>
+        <div class="content-wrapper">
+            <!-- Left Column -->
+            <div class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Welcome to Peptabase</h1>
+                    <p>The first-ever comprehensive database for peptide aptamers developed for versatile applications. With detailed insights into each aptamer and dynamic structure prediction tool, Peptabase aims to provide a unique platform for researchers and innovators, enabling new breakthroughs in diagnostics and therapeutics.</p>
                 </div>
-
-                <div class="form-group">
-                    <label for="m_SortBy" class="form-label">Sort By</label>
-                    <select id="m_SortBy" name="SortBy" class="form-control">
-                        <option value="Length (low-high)" class="form-color">Length (low-high)</option>
-                        <option value="Length (high-low)" class="form-color">Length (high-low)</option>
-                        <option value="Alphabetically (a-z)" class="form-color">Alphabetically (a-z)</option>
-                        <option value="Alphabetically (z-a)" class="form-color">Alphabetically (z-a)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="m_Show" class="form-label">Show</label>
-                    <select id="m_Show" name="Show" class="form-control">
-                        <option value="10" class="form-color">10</option>
-                        <option value="25" class="form-color">25</option>
-                        <option value="50" class="form-color">50</option>
-                        <option value="100" class="form-color">100</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn">Search Database</button>
-            </form>
-
-            <div class="or">OR</div>
-
-            <form id="keyword-form" class="search-form">
-                <div>
-                    <div class="form-group">
-                        <label for="keyword" class="form-label">Search By Keyword</label>
+            </div>
+    
+            <!-- Right Column -->
+            <div class="search-section">
+                <h2 class="heading">Search The Database</h2>
+                <div class="search-container">
+                    <form id="search-form" class="search-form">
+                        <div class="form-group">
+                            <label for="m_AptamerType" class="form-label">Aptamer Type</label>
+                            <select id="m_AptamerType" name="AptamerType" class="form-control">
+                                <option value="All" class="form-color">All</option>
+                                <option value="Anticancer" class="form-color">AntiCancer</option>
+                                <option value="Antiviral" class="form-color">Antiviral</option>
+                                <option value="Diagnostics" class="form-color">Diagnostics</option>
+                                <option value="PlantGenomics" class="form-color">PlantGenomics</option>
+                                <option value="Other" class="form-color">Other</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="m_SortBy" class="form-label">Sort By</label>
+                            <select id="m_SortBy" name="SortBy" class="form-control">
+                                <option value="Length (low-high)" class="form-color">Length (low-high)</option>
+                                <option value="Length (high-low)" class="form-color">Length (high-low)</option>
+                                <option value="Alphabetically (a-z)" class="form-color">Alphabetically (a-z)</option>
+                                <option value="Alphabetically (z-a)" class="form-color">Alphabetically (z-a)</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="m_Show" class="form-label">Show</label>
+                            <select id="m_Show" name="Show" class="form-control">
+                                <option value="10" class="form-color">10</option>
+                                <option value="25" class="form-color">25</option>
+                                <option value="50" class="form-color">50</option>
+                                <option value="100" class="form-color">100</option>
+                            </select>
+                        </div>
+    
+                        <button type="submit" class="btn">Search Database</button>
+                    </form>
+    
+                    <div class="divider">
+                        <span class="divider-line"></span>
+                        <span class="divider-text">OR</span>
+                        <span class="divider-line"></span>
                     </div>
-                    <div class="form-group form-group-2">
-                        <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
-                        <button type="submit" class="btn">Search by Keyword</button>
+    
+                    <form id="keyword-form" class="search-form">
+                        <div class="keyword-search">
+                            <label for="keyword" class="form-label">Search By Keyword</label>
+                            <div class="keyword-input-group">
+                                <input type="text" id="keyword" class="form-control" placeholder="Enter keyword...">
+                                <button type="submit" class="btn">Search by Keyword</button>
+                            </div>
+                        </div>
+                    </form>
+    
+                    <div class="results">
+                        <h2>Search Results</h2>
+                        <ul id="search-results"></ul>
                     </div>
                 </div>
-            </form>
-
-            <div class="results">
-                <h2>Search Results</h2>
-                <ul id="search-results"></ul>
             </div>
         </div>
     </main>
