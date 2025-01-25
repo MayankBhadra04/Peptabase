@@ -16,6 +16,9 @@ use actix_web::web::Data;
 use crate::admin::admin_config;
 use crate::auth::auth_config;
 use crate::view::view_config;
+use include_dir::include_dir;
+use std::str::FromStr;
+use shuttle_shared_db::Postgres;
 
 #[derive(Clone)]
 struct AppState {
@@ -53,9 +56,46 @@ async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), 
     Ok(())
 }
 
+static STATIC_FILES: include_dir::Dir = include_dir!("./src/static");
+
+async fn serve_static_files(path: web::Path<String>) -> HttpResponse {
+    // Get the file name requested by the user (e.g., /index.html or /amit_sir.jpg)
+    let file_path = format!("{}", path);
+
+    // Attempt to find the file in the included directory
+    if let Some(file) = STATIC_FILES.get_file(file_path.as_str()) {
+        // Try to determine the content type based on file extension
+        let content_type = match file_path.rsplit('.').next() {
+            Some("html") => "text/html",
+            Some("css") => "text/css",
+            Some("js") => "application/javascript",
+            Some("jpg") | Some("jpeg") => "image/jpeg",
+            Some("png") => "image/png",
+            Some("gif") => "image/gif",
+            _ => "application/octet-stream", // Default type for unknown files
+        };
+
+        // If the content is text-based (HTML, CSS, JS)
+        if let Some(content) = file.contents_utf8() {
+            HttpResponse::Ok()
+                .content_type(content_type)
+                .body(content)
+        } else {
+            // If the content is binary (like images)
+            HttpResponse::Ok()
+                .content_type(content_type)
+                .body(file.contents())
+        }
+    } else {
+        // Return a 404 if the file doesn't exist
+        println!("File not found {}", file_path);
+        HttpResponse::NotFound().body("File not found")
+    }
+}
+
 #[shuttle_runtime::main]
 async fn actix_web(
-    #[shuttle_shared_db::Postgres] pool: PgPool,
+    #[Postgres] pool: PgPool,
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
 
     match execute_queries_from_file(&pool, "./migrations/0001_aptamer.sql").await {
@@ -87,7 +127,9 @@ async fn actix_web(
                 .app_data(state),
         );
         cfg.route("/", web::get().to(index));
-        cfg.service(actix_files::Files::new("/static", "./src/static"));
+        // cfg.service(actix_files::Files::new("/static", "./src/static"));
+        cfg.route("/{filename:.*}", web::get().to(serve_static_files));
+        cfg.route("/static/{filename:.*}", web::get().to(serve_static_files));
     };
     println!("All set!");
     Ok(config.into())
