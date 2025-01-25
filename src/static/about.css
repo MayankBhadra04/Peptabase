@@ -105,7 +105,6 @@ body {
 }
 
 .name {
-  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
@@ -115,7 +114,7 @@ body {
 
 /* Contributors Section */
 .contributors {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .contributors h2 {
