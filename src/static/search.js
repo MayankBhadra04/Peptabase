@@ -9,6 +9,64 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get keyword input
     const keyword = document.getElementById('keyword').value.toLowerCase();
     fetch(`https://peptabase-rpqb.shuttle.app/v1/fetch/${keyword}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        searchResults.innerHTML = '';
+
+        const table = document.createElement('table');
+        table.classList.add('search-table');
+
+        const headerRow = table.createTHead().insertRow();
+        Object.keys(data[0]).forEach(key => {
+          if (key !== 'id') { // Exclude 'id' from being displayed
+            const headerCell = document.createElement('th');
+            headerCell.textContent = key;
+            headerRow.appendChild(headerCell);
+          }
+        });
+
+        const tbody = table.createTBody();
+        data.forEach(result => {
+          const row = tbody.insertRow();
+          Object.entries(result).forEach(([key, value]) => {
+            if (key !== 'id') { // Exclude 'id' from being displayed
+              const cell = row.insertCell();
+
+              // Show structure and reference fields as full links
+              if (key === 'structure' || key === 'reference') {
+                const link = document.createElement('a');
+                link.href = value;
+                link.textContent = value; // Display the full link
+                link.target = '_blank'; // Open link in a new tab
+                cell.appendChild(link);
+              } else {
+                cell.textContent = value;
+              }
+            }
+          });
+        });
+
+        searchResults.appendChild(table);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  });
+
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const aptamerType = document.getElementById('m_AptamerType').value;
+    const sortBy = document.getElementById('m_SortBy').value;
+    const show = document.getElementById('m_Show').value;
+
+    if (aptamerType === 'All') {
+      fetch(`https://peptabase-rpqb.shuttle.app/v1/fetch`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -36,7 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
             Object.entries(result).forEach(([key, value]) => {
               if (key !== 'id') { // Exclude 'id' from being displayed
                 const cell = row.insertCell();
-                cell.textContent = value;
+
+                // Show structure and reference fields as full links
+                if (key === 'structure' || key === 'reference') {
+                  const link = document.createElement('a');
+                  link.href = value;
+                  link.textContent = value; // Display the full link
+                  link.target = '_blank'; // Open link in a new tab
+                  cell.appendChild(link);
+                } else {
+                  cell.textContent = value;
+                }
               }
             });
           });
@@ -46,58 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
           console.error('Error fetching data:', error);
         });
-
-
-  });
-
-
-
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const aptamerType = document.getElementById('m_AptamerType').value;
-    const sortBy = document.getElementById('m_SortBy').value;
-    const show = document.getElementById('m_Show').value;
-
-    if (aptamerType === 'All') {
-      fetch(`https://peptabase-rpqb.shuttle.app/v1/fetch`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            searchResults.innerHTML = '';
-
-            const table = document.createElement('table');
-            table.classList.add('search-table');
-
-            const headerRow = table.createTHead().insertRow();
-            Object.keys(data[0]).forEach(key => {
-              if (key !== 'id') { // Exclude 'id' from being displayed
-                const headerCell = document.createElement('th');
-                headerCell.textContent = key;
-                headerRow.appendChild(headerCell);
-              }
-            });
-
-            const tbody = table.createTBody();
-            data.forEach(result => {
-              const row = tbody.insertRow();
-              Object.entries(result).forEach(([key, value]) => {
-                if (key !== 'id') { // Exclude 'id' from being displayed
-                  const cell = row.insertCell();
-                  cell.textContent = value;
-                }
-              });
-            });
-
-            searchResults.appendChild(table);
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-          });
     } else {
       const requestBody = {
         aptamer: '',
@@ -114,43 +130,53 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         body: JSON.stringify(requestBody)
       })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          searchResults.innerHTML = '';
+
+          const table = document.createElement('table');
+          table.classList.add('search-table');
+
+          const headerRow = table.createTHead().insertRow();
+          Object.keys(data[0]).forEach(key => {
+            if (key !== 'id') { // Exclude 'id' from being displayed
+              const headerCell = document.createElement('th');
+              headerCell.textContent = key;
+              headerRow.appendChild(headerCell);
             }
-            return response.json();
-          })
-          .then(data => {
-            searchResults.innerHTML = '';
+          });
 
-            const table = document.createElement('table');
-            table.classList.add('search-table');
-
-            const headerRow = table.createTHead().insertRow();
-            Object.keys(data[0]).forEach(key => {
+          const tbody = table.createTBody();
+          data.forEach(result => {
+            const row = tbody.insertRow();
+            Object.entries(result).forEach(([key, value]) => {
               if (key !== 'id') { // Exclude 'id' from being displayed
-                const headerCell = document.createElement('th');
-                headerCell.textContent = key;
-                headerRow.appendChild(headerCell);
-              }
-            });
+                const cell = row.insertCell();
 
-            const tbody = table.createTBody();
-            data.forEach(result => {
-              const row = tbody.insertRow();
-              Object.entries(result).forEach(([key, value]) => {
-                if (key !== 'id') { // Exclude 'id' from being displayed
-                  const cell = row.insertCell();
+                // Show structure and reference fields as full links
+                if (key === 'structure' || key === 'reference') {
+                  const link = document.createElement('a');
+                  link.href = value;
+                  link.textContent = value; // Display the full link
+                  link.target = '_blank'; // Open link in a new tab
+                  cell.appendChild(link);
+                } else {
                   cell.textContent = value;
                 }
-              });
+              }
             });
-
-            searchResults.appendChild(table);
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
           });
+
+          searchResults.appendChild(table);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
     }
   });
 });
