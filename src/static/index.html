@@ -499,6 +499,31 @@
     padding: 0;
 }
 
+/* footer*/
+
+.footer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  margin-top: 10px;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+  border-top: 1px solid #ccc;
+}
+.para{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.footer a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .content-wrapper {
@@ -647,9 +672,27 @@
                         <h2>Search Results</h2>
                         <ul id="search-results"></ul>
                     </div>
+
+                    
                 </div>
             </div>
         </div>
+
+        <footer class="footer">
+            <p class="para" >
+                If you are using structures provided in the database, please cite the following: 
+            </p>
+            <p>
+             1) Mirdita, M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all. 
+              <em>Nat Methods</em> 19, 679–682 (2022). 
+              <a href="https://doi.org/10.1038/s41592-022-01488-1" target="_blank">https://doi.org/10.1038/s41592-022-01488-1</a>
+            </p>
+            <p>
+             2) Jumper, J., Evans, R., Pritzel, A. et al. Highly accurate protein structure prediction with AlphaFold. 
+              <em>Nature</em> 596, 583–589 (2021). 
+              <a href="https://doi.org/10.1038/s41586-021-03819-2" target="_blank">https://doi.org/10.1038/s41586-021-03819-2</a>
+            </p>
+          </footer>
     </main>
     <script>
         document.getElementById("mobile-menu").addEventListener("click", function () {
