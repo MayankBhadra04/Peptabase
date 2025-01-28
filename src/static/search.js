@@ -9,51 +9,60 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get keyword input
     const keyword = document.getElementById('keyword').value.toLowerCase();
     fetch(`https://peptabase-ixik.shuttle.app/v1/fetch/${keyword}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      searchResults.innerHTML = '';
-
-      const table = document.createElement('table');
-      table.classList.add('search-table');
-
-      const headerRow = table.createTHead().insertRow();
-      Object.keys(data[0]).forEach(key => {
-        if (key !== 'id') { // Exclude 'id' from being displayed
-          const headerCell = document.createElement('th');
-          headerCell.textContent = key;
-          headerRow.appendChild(headerCell);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      });
+        return response.json();
+      })
+      .then(data => {
+        searchResults.innerHTML = '';
 
-      const tbody = table.createTBody();
-      data.forEach(result => {
-        const row = tbody.insertRow();
-        Object.entries(result).forEach(([key, value]) => {
+        const table = document.createElement('table');
+        table.classList.add('search-table');
+
+        const headerRow = table.createTHead().insertRow();
+        Object.keys(data[0]).forEach(key => {
           if (key !== 'id') { // Exclude 'id' from being displayed
-            const cell = row.insertCell();
-            cell.textContent = value;
+            const headerCell = document.createElement('th');
+            headerCell.textContent = key;
+            headerRow.appendChild(headerCell);
           }
         });
+
+        // Add "Structure Link" header
+        const structureHeader = document.createElement('th');
+        structureHeader.textContent = 'Structure Link';
+        headerRow.appendChild(structureHeader);
+
+        const tbody = table.createTBody();
+        data.forEach(result => {
+          const row = tbody.insertRow();
+          Object.entries(result).forEach(([key, value]) => {
+            if (key !== 'id') { // Exclude 'id' from being displayed
+              const cell = row.insertCell();
+              cell.textContent = value;
+            }
+          });
+
+          // Add "Structure Link" cell
+          const structureCell = row.insertCell();
+          const link = document.createElement('a');
+          link.href = result.structure_link; // Assuming the JSON contains 'structure_link'
+          link.textContent = 'View Structure';
+          link.target = '_blank';
+          structureCell.appendChild(link);
+        });
+
+        searchResults.appendChild(table);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
       });
-
-      searchResults.appendChild(table);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-
-
   });
 
-  
-
   searchForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const aptamerType = document.getElementById('m_AptamerType').value;
     const sortBy = document.getElementById('m_SortBy').value;
@@ -82,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           });
 
+          // Add "Structure Link" header
+          const structureHeader = document.createElement('th');
+          structureHeader.textContent = 'Structure Link';
+          headerRow.appendChild(structureHeader);
+
           const tbody = table.createTBody();
           data.forEach(result => {
             const row = tbody.insertRow();
@@ -91,6 +105,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 cell.textContent = value;
               }
             });
+
+            // Add "Structure Link" cell
+            const structureCell = row.insertCell();
+            const link = document.createElement('a');
+            link.href = result.structure_link; // Assuming the JSON contains 'structure_link'
+            link.textContent = 'View Structure';
+            link.target = '_blank';
+            structureCell.appendChild(link);
           });
 
           searchResults.appendChild(table);
@@ -112,45 +134,58 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBody) 
+        body: JSON.stringify(requestBody)
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        searchResults.innerHTML = '';
-
-        const table = document.createElement('table');
-        table.classList.add('search-table');
-
-        const headerRow = table.createTHead().insertRow();
-        Object.keys(data[0]).forEach(key => {
-          if (key !== 'id') { // Exclude 'id' from being displayed
-            const headerCell = document.createElement('th');
-            headerCell.textContent = key;
-            headerRow.appendChild(headerCell);
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
           }
-        });
+          return response.json();
+        })
+        .then(data => {
+          searchResults.innerHTML = '';
 
-        const tbody = table.createTBody();
-        data.forEach(result => {
-          const row = tbody.insertRow();
-          Object.entries(result).forEach(([key, value]) => {
+          const table = document.createElement('table');
+          table.classList.add('search-table');
+
+          const headerRow = table.createTHead().insertRow();
+          Object.keys(data[0]).forEach(key => {
             if (key !== 'id') { // Exclude 'id' from being displayed
-              const cell = row.insertCell();
-              cell.textContent = value;
+              const headerCell = document.createElement('th');
+              headerCell.textContent = key;
+              headerRow.appendChild(headerCell);
             }
           });
-        });
 
-        searchResults.appendChild(table);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+          // Add "Structure Link" header
+          const structureHeader = document.createElement('th');
+          structureHeader.textContent = 'Structure Link';
+          headerRow.appendChild(structureHeader);
+
+          const tbody = table.createTBody();
+          data.forEach(result => {
+            const row = tbody.insertRow();
+            Object.entries(result).forEach(([key, value]) => {
+              if (key !== 'id') { // Exclude 'id' from being displayed
+                const cell = row.insertCell();
+                cell.textContent = value;
+              }
+            });
+
+            // Add "Structure Link" cell
+            const structureCell = row.insertCell();
+            const link = document.createElement('a');
+            link.href = result.structure_link; // Assuming the JSON contains 'structure_link'
+            link.textContent = 'View Structure';
+            link.target = '_blank';
+            structureCell.appendChild(link);
+          });
+
+          searchResults.appendChild(table);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
     }
   });
 });
