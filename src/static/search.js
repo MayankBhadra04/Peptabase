@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const keyword = document.getElementById('keyword').value.toLowerCase();
     fetch(`https://peptabase-ixik.shuttle.app/v1/fetch/${keyword}`)
       .then(response => {
+        console.log(response.body);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -70,56 +71,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (aptamerType === 'All') {
       fetch(`https://peptabase-ixik.shuttle.app/v1/fetch`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          searchResults.innerHTML = '';
-
-          const table = document.createElement('table');
-          table.classList.add('search-table');
-
-          const headerRow = table.createTHead().insertRow();
-          Object.keys(data[0]).forEach(key => {
-            if (key !== 'id') { // Exclude 'id' from being displayed
-              const headerCell = document.createElement('th');
-              headerCell.textContent = key;
-              headerRow.appendChild(headerCell);
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
-          });
+            return response.json().then(data => {
+              console.log(data); // Log the parsed JSON body
+              return data; // Pass data to the next `.then`
+            });
+          })
+          .then(data => {
+            searchResults.innerHTML = '';
 
-          // Add "Structure Link" header
-          const structureHeader = document.createElement('th');
-          structureHeader.textContent = 'Structure Link';
-          headerRow.appendChild(structureHeader);
+            const table = document.createElement('table');
+            table.classList.add('search-table');
 
-          const tbody = table.createTBody();
-          data.forEach(result => {
-            const row = tbody.insertRow();
-            Object.entries(result).forEach(([key, value]) => {
+            const headerRow = table.createTHead().insertRow();
+            Object.keys(data[0]).forEach(key => {
               if (key !== 'id') { // Exclude 'id' from being displayed
-                const cell = row.insertCell();
-                cell.textContent = value;
+                const headerCell = document.createElement('th');
+                headerCell.textContent = key;
+                headerRow.appendChild(headerCell);
               }
             });
 
-            // Add "Structure Link" cell
-            const structureCell = row.insertCell();
-            const link = document.createElement('a');
-            link.href = result.structure_link; // Assuming the JSON contains 'structure_link'
-            link.textContent = 'View Structure';
-            link.target = '_blank';
-            structureCell.appendChild(link);
-          });
+            // Add "Structure Link" header
+            const structureHeader = document.createElement('th');
+            structureHeader.textContent = 'Structure Link';
+            headerRow.appendChild(structureHeader);
 
-          searchResults.appendChild(table);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+            const tbody = table.createTBody();
+            data.forEach(result => {
+              const row = tbody.insertRow();
+              Object.entries(result).forEach(([key, value]) => {
+                if (key !== 'id') { // Exclude 'id' from being displayed
+                  const cell = row.insertCell();
+                  cell.textContent = value;
+                }
+              });
+
+              // Add "Structure Link" cell
+              const structureCell = row.insertCell();
+              const link = document.createElement('a');
+              link.href = result.structure_link; // Assuming the JSON contains 'structure_link'
+              link.textContent = 'View Structure';
+              link.target = '_blank';
+              structureCell.appendChild(link);
+            });
+
+            searchResults.appendChild(table);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
     } else {
       const requestBody = {
         aptamer: '',
