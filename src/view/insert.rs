@@ -13,7 +13,8 @@ struct EntryApproval {
     length: String,
     sequence: String,
     effect: String,
-    reference: String
+    reference: String,
+    structure: String
 }
 #[derive(Deserialize, FromRow)]
 pub struct Comment {
@@ -22,7 +23,7 @@ pub struct Comment {
 }
 pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
 
-    let todo: Result<Entry, Error>  = sqlx::query_as("SELECT aptamer, target, apt_type, length, sequence, effect, reference from pending_list where id=$1")
+    let todo: Result<Entry, Error>  = sqlx::query_as("SELECT aptamer, target, apt_type, length, sequence, effect, reference, structure from pending_list where id=$1")
         .bind(&id)
         .fetch_one(pool)
         .await;
@@ -35,7 +36,7 @@ pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
         }
     };
 
-    match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
+    match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference, structure) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);")
         .bind(&data.aptamer)
         .bind(&data.target)
         .bind(&data.apt_type)
@@ -43,6 +44,7 @@ pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
         .bind(&data.sequence)
         .bind(&data.effect)
         .bind(&data.reference)
+        .bind(&data.structure)
         .execute(pool)
         .await
         .map_err(|e| error::ErrorBadRequest(e.to_string())) {
@@ -57,7 +59,7 @@ pub async fn insert(pool: &PgPool, id: i32) -> HttpResponse {
 
 #[post("/insert")]
 pub async fn insert_approval(pool: web::Data<AppState>, data: Json<EntryApproval>) -> HttpResponse{
-    match sqlx::query("INSERT INTO pending_list (email, aptamer, target, apt_type, length, sequence, effect, reference, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);")
+    match sqlx::query("INSERT INTO pending_list (email, aptamer, target, apt_type, length, sequence, effect, reference, structure, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);")
         .bind(&data.email)
         .bind(&data.aptamer)
         .bind(&data.target)
@@ -66,6 +68,7 @@ pub async fn insert_approval(pool: web::Data<AppState>, data: Json<EntryApproval
         .bind(&data.sequence)
         .bind(&data.effect)
         .bind(&data.reference)
+        .bind(&data.structure)
         .bind("Pending".to_string())
         .execute(&pool.pool)
         .await

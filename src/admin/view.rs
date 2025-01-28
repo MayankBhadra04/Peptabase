@@ -1,9 +1,9 @@
-use actix_web::{App, delete, error, HttpResponse, web};
-use serde_derive::{Deserialize, Serialize};
-use sqlx::{Error, FromRow};
-use crate::{AppState, Entry};
 use crate::auth::jwt::JwToken;
 use crate::view::insert::insert;
+use crate::{AppState, Entry};
+use actix_web::{delete, error, web, HttpResponse};
+use serde_derive::{Deserialize, Serialize};
+use sqlx::{Error, FromRow};
 
 #[derive(FromRow, Serialize, Deserialize)]
 pub struct PendingList {
@@ -16,7 +16,8 @@ pub struct PendingList {
     sequence: String,
     effect: String,
     reference: String,
-    status: String
+    status: String,
+    structure: String
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ApprovalList {
@@ -51,7 +52,7 @@ pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList
     if jwt.is_admin == true {
         println!("{:?}", payload);
         if payload.decision == true {
-            return match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
+            match sqlx::query("UPDATE pending_list set status = 'Approved' where id=$1")
                 .bind(&payload.id)
                 .execute(&pool.pool)
                 .await {
@@ -61,7 +62,7 @@ pub async fn approve (pool: web::Data<AppState>, payload: web::Json<ApprovalList
                 Err(_) => {
                     HttpResponse::BadRequest().finish()
                 }
-            };
+            }
         } else {
             match sqlx::query("DELETE from pending_list where id=$1")
                 .bind(&payload.id)
@@ -101,7 +102,7 @@ pub async fn delete_one (jwt: JwToken, path: web::Path<i32>, pool: web::Data<App
 
 pub async fn edit_row(jwt: JwToken, pool: web::Data<AppState>, payload: web::Json<Entry>) -> HttpResponse {
     if jwt.is_admin == true {
-        let todo = sqlx::query("UPDATE aptamers set aptamer = $1, target = $2, apt_type = $3, length = $4, sequence = $5, effect = $6, reference = $7 where id = $8")
+        let todo = sqlx::query("UPDATE aptamers set aptamer = $1, target = $2, apt_type = $3, length = $4, sequence = $5, effect = $6, reference = $7, structure = $8 where id = $9")
             .bind(&payload.aptamer)
             .bind(&payload.target)
             .bind(&payload.apt_type)
@@ -109,6 +110,7 @@ pub async fn edit_row(jwt: JwToken, pool: web::Data<AppState>, payload: web::Jso
             .bind(&payload.sequence)
             .bind(&payload.effect)
             .bind(&payload.reference)
+            .bind(&payload.structure)
             .bind(&payload.id)
             .execute(&pool.pool)
             .await;
@@ -180,7 +182,7 @@ pub async fn insert_admin (pool: web::Data<AppState>, data: web::Json<Entry>, jw
     if !jwt.is_admin {
         HttpResponse::Unauthorized().finish()
     } else {
-        match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference) VALUES ($1, $2, $3, $4, $5, $6, $7);")
+        match sqlx::query("INSERT INTO aptamers (aptamer, target, apt_type, length, sequence, effect, reference, structure) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);")
             .bind(&data.aptamer)
             .bind(&data.target)
             .bind(&data.apt_type)
@@ -188,6 +190,7 @@ pub async fn insert_admin (pool: web::Data<AppState>, data: web::Json<Entry>, jw
             .bind(&data.sequence)
             .bind(&data.effect)
             .bind(&data.reference)
+            .bind(&data.structure)
             .execute(&pool.pool)
             .await
             .map_err(|e| error::ErrorBadRequest(e.to_string())) {

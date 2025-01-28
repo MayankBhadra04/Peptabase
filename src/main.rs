@@ -33,7 +33,8 @@ struct Entry {
     length: String,
     sequence: String,
     effect: String,
-    reference: String
+    reference: String,
+    structure: String
 }
 
 async fn execute_queries_from_file(pool: &PgPool, filename: &str) -> Result<(), sqlx::Error> {
@@ -127,7 +128,6 @@ async fn actix_web(
                 .app_data(state),
         );
         cfg.route("/", web::get().to(index));
-        // cfg.service(actix_files::Files::new("/static", "./src/static"));
         cfg.route("/{filename:.*}", web::get().to(serve_static_files));
         cfg.route("/static/{filename:.*}", web::get().to(serve_static_files));
     };
