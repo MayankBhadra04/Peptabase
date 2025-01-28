@@ -1,26 +1,26 @@
 CREATE TABLE aptamers (
     id SERIAL PRIMARY KEY,
-    aptamer varchar(39) DEFAULT NULL,
-    target varchar(67) DEFAULT NULL,
-    apt_type varchar(10) DEFAULT NULL,
-    length varchar(3) DEFAULT NULL,
-    sequence varchar(42) DEFAULT NULL,
-    effect varchar(285) DEFAULT NULL,
-    reference varchar(415) DEFAULT NULL,
+    aptamer varchar DEFAULT NULL,
+    target varchar DEFAULT NULL,
+    apt_type varchar DEFAULT NULL,
+    length varchar DEFAULT NULL,
+    sequence varchar DEFAULT NULL,
+    effect varchar DEFAULT NULL,
+    reference varchar DEFAULT NULL,
     structure varchar DEFAULT NULL
 );
 CREATE TABLE pending_list (
     id SERIAL PRIMARY KEY,
-    email varchar(50) NOT NULL,
-    aptamer varchar(39) DEFAULT NULL,
-    target varchar(67) DEFAULT NULL,
-    apt_type varchar(10) DEFAULT NULL,
-    length varchar(3) DEFAULT NULL,
-    sequence varchar(42) DEFAULT NULL,
-    effect varchar(285) DEFAULT NULL,
-    reference varchar(415) DEFAULT NULL,
+    email varchar NOT NULL,
+    aptamer varchar DEFAULT NULL,
+    target varchar DEFAULT NULL,
+    apt_type varchar DEFAULT NULL,
+    length varchar DEFAULT NULL,
+    sequence varchar DEFAULT NULL,
+    effect varchar DEFAULT NULL,
+    reference varchar DEFAULT NULL,
     structure varchar DEFAULT NULL,
-    status varchar(10) DEFAULT 'Pending'
+    status varchar DEFAULT 'Pending'
 );
 CREATE TABLE users (
     email VARCHAR PRIMARY KEY,
@@ -35,7 +35,7 @@ CREATE TABLE comment (
 
 INSERT INTO aptamers (
     aptamer, target, apt_type, length, sequence,
-    effect, reference
+    effect, reference, structure
 ) VALUES
 ('TRIAP?', 'TrioGEFD2', 'Anticancer', '42', 'AREGADGAICGYNLATLVMLGPSERVFCPLCEPCSSDIYELM', 'specifically blocks GEFD2-exchange activity on RhoA in vitro and inhibits TrioGEFD2-mediated activation of RhoA in intact cells and specifically reverts the neurite retraction phenotype induced by TrioGEFD2 in PC12 cells', 'https://doi.org/10.1016/S0014-5793(02)02928-9', 'https://colab.research.google.com/drive/1ac7cyS31emsDW0cY7SoJXt4A5CYi6Vbx?usp=sharing'),
 ('TRIAP?', 'TRIO GEF2(cDNA)', 'Anticancer', '20', 'IPKKYERSSPLRRPVRMMLR', 'inhibit oncogenic rhogef', 'https://doi.org/10.1016/S0014-5793(02)02928-9', 'https://colab.research.google.com/drive/11qS2hkB5HfarkTpWv0zeXO8EFfngg-iG?usp=sharing'),
